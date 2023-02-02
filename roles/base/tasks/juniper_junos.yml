@@ -1,0 +1,15 @@
+---
+- name: Set Hostname
+  junipernetworks.junos.junos_command:
+    commands:
+      - set system host-name {{ hostname }}
+
+- name: Set Domain
+  junipernetworks.junos.junos_command:
+    commands:
+      - set system domain-name {{ domain_name }}
+
+- name: Set DNS Servers
+  junipernetworks.junos.junos_command:
+    commands:
+      - set name-server {{ dns_server }}

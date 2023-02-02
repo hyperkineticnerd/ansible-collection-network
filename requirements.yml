@@ -1,0 +1,10 @@
+---
+roles: []
+  # - name:
+  #   version:
+collections:
+  - arista.eos
+  - cisco.ios
+  - cisco.nxos
+  - community.network
+  - junipernetworks.junos

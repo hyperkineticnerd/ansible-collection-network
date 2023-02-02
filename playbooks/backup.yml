@@ -1,0 +1,37 @@
+#!/usr/bin/ansible-playbook
+---
+- name: Backup Juniper
+  hosts: juniper
+  gather_facts: false
+  tasks:
+    - name: Run backup
+      # connection: netconf
+      junipernetworks.junos.junos_config:
+        backup: true
+        backup_options:
+          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+          dir_path: ./backup
+          backup_format: text
+
+- name: Backup Arista
+  hosts: arista
+  gather_facts: false
+  tasks:
+    - name: Run backup
+      # connection: netconf
+      arista.eos.eos_config:
+        backup: true
+        backup_options:
+          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+          dir_path: ./backup
+
+# - name: Backup Arista
+#   hosts: brocade
+#   gather_facts: false
+#   tasks:
+#     - name: Run backup
+#       # connection: netconf
+#       community.network.icx_config:
+#         backup: true
+#         backup_options:
+#           filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"

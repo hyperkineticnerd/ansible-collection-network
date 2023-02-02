@@ -1,0 +1,11 @@
+---
+# handlers file for initial_cfg
+- name: arista eos commit
+  arista.eos.eos_command:
+    commands:
+      - write
+
+- name: juniper srx commit
+  junipernetworks.junos.junos_command:
+    commands:
+      - commit and-quit

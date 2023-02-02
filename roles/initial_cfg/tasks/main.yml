@@ -1,0 +1,16 @@
+---
+# tasks file for initial_cfg
+- name: Arista EOS Initial Cfg
+  ansible.builtin.include_tasks: arista_eos.yml
+  when:
+    - ansible_network_os == 'arista.eos.eos'
+
+- name: Brocade ICX Initial Cfg
+  ansible.builtin.include_tasks: brocade_icx.yml
+  when:
+    - ansible_network_os == 'community.network.icx'
+
+- name: Juniper SRX Initial Cfg
+  ansible.builtin.include_tasks: juniper_junos.yml
+  when:
+    - ansible_network_os == 'junipernetworks.junos.junos'

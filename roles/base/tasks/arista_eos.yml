@@ -1,0 +1,21 @@
+# errdisable recovery cause bpduguard
+# transceiver qsfp default-mode 4x10G
+# service routing protocols model ribd
+# spanning-tree mode mstp
+# environment fan-speed override 40
+
+---
+- name: Set Hostname
+  arista.eos.eos_command:
+    commands:
+      - hostname "{{ ansible_hostname }}"
+
+- name: Set Domain
+  arista.eos.eos_command:
+    commands:
+      - dns domain "{{ domain_name }}"
+
+- name: Set DNS Servers
+  arista.eos.eos_command:
+    commands:
+      - ip name-server vrf default {{ dns_server }}

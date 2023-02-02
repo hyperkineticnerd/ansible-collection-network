@@ -1,0 +1,13 @@
+---
+# tasks file for base
+- name: Set Base Configuration for Arista EOS
+  ansible.builtin.include_tasks: arista_eos.yml
+  when: ansible_network_os == 'arista.eos.eos'
+
+- name: Set Base Configuration for Brocade ICX
+  ansible.builtin.include_tasks: brocade_icx.yml
+  when: ansible_network_os == 'community.network.icx'
+
+- name: Set Base Configuration for Juniper Junos
+  ansible.builtin.include_tasks: juniper_junos.yml
+  when: ansible_network_os == 'junipernetworks.junos.junos'

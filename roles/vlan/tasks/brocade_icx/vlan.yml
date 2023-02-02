@@ -1,0 +1,40 @@
+---
+# tasks file for initial_cfg
+- name: Set VLANs
+  community.network.icx_vlan:
+    aggregate:
+      - name: Personal
+        vlan_id: 10
+        state: present
+      - name: VPN
+        vlan_id: 11
+        state: present
+      - name: DHCP
+        vlan_id: 67
+        state: present
+      - name: IPMI
+        vlan_id: 99
+        state: present
+      - name: NAS
+        vlan_id: 100
+        state: present
+      - name: Metal
+        vlan_id: 110
+        state: present
+      - name: Virtual
+        vlan_id: 120
+        state: present
+      - name: OCP3
+        vlan_id: 130
+        state: present
+      - name: OCP4
+        vlan_id: 140
+        state: present
+      - name: Media
+        vlan_id: 247
+        state: present
+      - name: Automation
+        vlan_id: 666
+        state: present
+    state: present
+  

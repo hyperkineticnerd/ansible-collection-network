@@ -1,0 +1,21 @@
+dhcp server
+{% for subnet in dhcp_pools %}
+    subnet {{ subnet.network }}
+        {% if subnet.reservations is defined %}
+        reservations
+            {% for dev in subnet.reservations %}
+            mac-address {{ dev.mac }}
+                ipv4-address {{ dev.addr }}
+            !
+            {% endfor %}
+        {% endif %}
+        lease time 0 days 4 hours 0 minutes
+        default-gateway {{ subnet.router[0] }}
+        dns server {{ subnet.dns | join(' ') }}
+        range {{ subnet.range.low }} {{ subnet.range.high }}
+        {% if subnet.extra_lines is defined %}
+        {% for line in subnet.extra_lines %}
+        {{ line }}
+        {% endfor %}
+        {% endif %}
+{% endfor %}

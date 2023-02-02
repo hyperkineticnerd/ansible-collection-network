@@ -1,0 +1,46 @@
+---
+- name: Create DHCP Subnet
+  arista.eos.eos_config:
+    backup: true
+    # replace: block
+    parents:
+      - dhcp server
+    lines:
+      - subnet {{ item.network }}
+  loop: "{{ dhcp_pools }}"
+
+- name: Set Subnet
+  arista.eos.eos_config:
+    backup: true
+    # replace: block
+    parents: 
+      - dhcp server
+      -   subnet {{ item.network }}
+    lines:
+      - default-gateway {{ item.router[0] }}
+      - dns server {{ item.dns | join(' ') }}
+      - range {{ item.range.low }} {{ item.range.high }}
+  loop: "{{ dhcp_pools }}"
+
+# - name: DEBUG
+#   ansible.builtin.debug:
+#     var=item
+#   loop: "{{ dhcp_pools }}"
+#   ignore_errors: true
+
+- name: Set Extras
+  arista.eos.eos_config:
+    backup: true
+    # replace: block
+    parents: 
+      - dhcp server
+      -   subnet {{ item.network }}
+    lines: "{{ item.extra_lines }}"
+  loop: "{{ dhcp_pools }}"
+  ignore_errors: true
+
+- name: Set Reservations
+  ansible.builtin.include_tasks: arista_eos/reservations.yml
+  loop_control:
+    loop_var: outer_item
+  loop: "{{ dhcp_pools }}"

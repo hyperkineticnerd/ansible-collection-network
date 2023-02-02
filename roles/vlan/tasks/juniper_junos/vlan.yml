@@ -1,0 +1,42 @@
+---
+# tasks file for initial_cfg
+- name: Set VLANs
+  junipernetworks.junos.junos_vlans:
+    config:
+      - name: Personal
+        vlan_id: 10
+        # l3_interface: irb.10
+      - name: VPN
+        vlan_id: 11
+        # l3_interface: irb.11
+      - name: DHCP
+        vlan_id: 67
+        # l3_interface: irb.67
+      - name: IPMI
+        vlan_id: 99
+        # l3_interface: irb.99
+      - name: NAS
+        vlan_id: 100
+        # l3_interface: irb.100
+      - name: Metal
+        vlan_id: 110
+        # l3_interface: irb.110
+      - name: Virtual
+        vlan_id: 120
+        # l3_interface: irb.120
+      - name: OCP3
+        vlan_id: 130
+        # l3_interface: irb.130
+      - name: OCP4
+        vlan_id: 140
+        # l3_interface: irb.140
+      - name: Media
+        vlan_id: 247
+        # l3_interface: irb.247
+      - name: Automation
+        vlan_id: 666
+        # l3_interface: irb.666
+    state: "replaced"
+
+# - name: Set VRFs
+#   junipernetworks.junos.junos_vrf:
