@@ -1,22 +1,11 @@
 ---
 # tasks file for dhcp
-- name: Clear DHCP Server Cfg
-  arista.eos.eos_config:
-    lines:
-      - no dhcp server
-    backup: true
-
-# - name: Arista EOS
-#   ansible.builtin.include_tasks: arista_eos/subnet.yml
-#   when: 
-#     - ansible_network_os == 'arista.eos.eos'
-
-- name: Arista EOS
-  ansible.builtin.include_tasks: arista_eos/restore.yml
+- name: Arista EOS DHCP
+  ansible.builtin.include_tasks: arista_eos/main.yml
   when: 
     - ansible_network_os == 'arista.eos.eos'
 
-# - name: Arista EOS CFG
+# - name: Arista EOS DHCP
 #   arista.eos.eos_config:
 #     src: arista_eos/loop.j2
-#     backup: true
+#     backup: false

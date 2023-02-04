@@ -1,39 +1,10 @@
 ---
-# tasks file for initial_cfg
+# tasks file for vlan
 - name: Set VLANs
   arista.eos.eos_vlans:
+    state: replaced
     config:
-      - name: Network
-        vlan_id: 1
+      - name: "{{ item.name }}"
+        vlan_id: "{{ item.vlan_id }}"
         state: active
-      - name: Personal
-        vlan_id: 10
-        state: active
-      - name: DHCP
-        vlan_id: 67
-        state: active
-      - name: IPMI
-        vlan_id: 99
-        state: active
-      - name: NAS
-        vlan_id: 100
-        state: active
-      - name: Metal
-        vlan_id: 110
-        state: active
-      - name: Virtual
-        vlan_id: 120
-        state: active
-      - name: OCP4
-        vlan_id: 140
-        state: active
-      - name: Media
-        vlan_id: 247
-        state: active
-      - name: WiFi
-        vlan_id: 204
-        state: active
-      - name: Automation
-        vlan_id: 666
-        state: active
-    state: overridden
+  with_items: "{{ inventory_vlans }}"

@@ -12,4 +12,4 @@
 - name: Set DNS Servers
   community.network.icx_config:
     lanes:
-      - dns-server {{ dns_server }}
+      - dns-server {{ inventory_dns_servers[0:1] | join(' ') }}

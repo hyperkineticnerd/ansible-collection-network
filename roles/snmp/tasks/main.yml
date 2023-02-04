@@ -1,11 +1,11 @@
 ---
 # tasks file for snmp
 - name: Configure SNMP on Arista EOS
-  ansible.builtin.include_tasks: arista_eos.yml
+  ansible.builtin.include_tasks: arista_eos/snmp.yml
   when:
     - ansible_network_os == 'arista.eos.eos'
 
 - name: Configure SNMP on Juniper SRX
-  ansible.builtin.include_tasks: juniper_junos.yml
+  ansible.builtin.include_tasks: juniper_junos/snmp.yml
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'

@@ -1,0 +1,19 @@
+---
+- name: Configure SNMP Server
+  junipernetworks.junos.junos_snmp_server:
+    state: rendered
+    config:
+      contact: "{{ inventory_snmp.contact }}"
+      location: "{{ inventory_snmp.location }}"
+      communities:
+        - name: "{{ inventory_snmp.v2.community }}"
+          authorization: "read-write"
+          clients: "{{ inventory_snmp.v2.clients }}"
+          view: all
+        - name: public
+          authorization: "read-only"
+          clients: "{{ inventory_snmp.v2.clients }}"
+      views:
+        - name: all
+          oids:
+            - oid: ".1"

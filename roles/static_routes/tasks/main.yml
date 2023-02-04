@@ -1,2 +1,6 @@
 ---
-# tasks file for static_routes
+# tasks file for routes
+- name: Arista EOS Static Routes
+  ansible.builtin.include_tasks: arista_eos/main.yml
+  when:
+    - ansible_network_os == 'arista.eos.eos'

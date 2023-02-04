@@ -1,0 +1,11 @@
+---
+# tasks file for vlan
+- name: Juniper SRX VLANs
+  ansible.builtin.include_tasks: juniper_junos/vlan.yml
+  when:
+    - ansible_network_os == 'junipernetworks.junos.junos'
+
+- name: Juniper SRX VLAN L3
+  ansible.builtin.include_tasks: juniper_junos/l3.yml
+  when:
+    - ansible_network_os == 'junipernetworks.junos.junos'

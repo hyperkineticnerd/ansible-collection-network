@@ -1,0 +1,29 @@
+---
+# tasks file for bond
+- name: Create Port-Channel
+  arista.eos.eos_interfaces:
+    state: rendered
+    config:
+      - name: Port-Channel {{ item.port_group.id }}
+        description: "{{ item.port_group.name }}"
+        # mtu: 1514
+  loop: "{{ device_lacp_ports }}"
+
+- name: Set Port-Channel L2
+  arista.eos.eos_l2_interfaces:
+    state: rendered
+    config:
+      - name: Port-Channel {{ item.port_group.id }}
+        mode: trunk
+  loop: "{{ device_lacp_ports }}"
+
+- name: Set Port-Channel Members
+  arista.eos.eos_lag_interfaces:
+    state: rendered
+    config:
+      - name: "{{ item.0.port_group.id }}"
+        members:
+          - member: "{{ item.1.iface_name }}"
+            mode: "{{ item.1.port_group.mode }}"
+  loop: "{{ device_lacp_ports | subelements('members') }}"
+

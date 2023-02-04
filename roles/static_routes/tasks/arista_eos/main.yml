@@ -1,0 +1,14 @@
+# task file for routes
+---
+- name: Set Route
+  arista.eos.eos_static_routes:
+    config:
+      - vrf: default
+        address_families:
+          - afi: ipv4
+            routes:
+              - dest: "{{ item.destination }}"
+                next_hop:
+                  - interface: "{{ item.route }}"
+    state: replaced
+  loop: "{{ inventory_static_routes }}"

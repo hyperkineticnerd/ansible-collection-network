@@ -12,4 +12,4 @@
 - name: Set DNS Servers
   junipernetworks.junos.junos_command:
     commands:
-      - set name-server {{ dns_server }}
+      - set name-server {{ inventory_dns_servers[0:1] | join(' ') }}

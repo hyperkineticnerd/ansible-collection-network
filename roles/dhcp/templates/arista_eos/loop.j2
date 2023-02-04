@@ -9,10 +9,12 @@ dhcp server
             !
             {% endfor %}
         {% endif %}
-        lease time 0 days 4 hours 0 minutes
         default-gateway {{ subnet.router[0] }}
         dns server {{ subnet.dns | join(' ') }}
+        {% if subnet.range is defined %}
         range {{ subnet.range.low }} {{ subnet.range.high }}
+        {% endif %}
+        lease time 0 days 4 hours 0 minutes
         {% if subnet.extra_lines is defined %}
         {% for line in subnet.extra_lines %}
         {{ line }}

@@ -1,0 +1,10 @@
+---
+# tasks file for tftp
+- name: Set subnet extras
+  ignore_errors: true
+  loop: "{{ inventory_tftp_config }}"
+  arista.eos.eos_config:
+    parents: 
+      - dhcp server
+      -   subnet {{ item.network }}
+    lines: "{{ item.tftp_config }}"
