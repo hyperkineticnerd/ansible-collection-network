@@ -24,6 +24,5 @@
       - name: "{{ item.0.port_group.id }}"
         members:
           - member: "{{ item.1.iface_name }}"
-            mode: "{{ item.1.port_group.mode }}"
+            mode: "{{ item.1.port_group.mode | default('active') }}"
   loop: "{{ device_lacp_ports | subelements('members') }}"
-

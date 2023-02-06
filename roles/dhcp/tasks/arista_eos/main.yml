@@ -13,25 +13,37 @@
     lines:
       - subnet {{ item.network }}
 
-- name: Set reservations
-  when: "item.reservations is defined"
-  loop: "{{ inventory_dhcp_pools | subelements('reservations') }}"
-  arista.eos.eos_config:
-    parents: 
-      - dhcp server
-      -    subnet {{ item.0.network }}
-      -       reservations
-    lines:
-      - mac-address {{ item.1.mac }}
-      -    ipv4-address {{ item.1.addr }}
-
 - name: Set subnet options
   loop: "{{ inventory_dhcp_pools }}"
   arista.eos.eos_config:
-    parents: 
+    parents:
       - dhcp server
-      -    subnet {{ item.network }}
+      - subnet {{ item.network }}
     lines:
       - default-gateway {{ item.router[0] }}
       - dns server {{ item.dns | join(' ') }}
       - range {{ item.range.low }} {{ item.range.high }}
+
+- name: Create reservations
+  loop: "{{ inventory_dhcp_pools }}"
+  arista.eos.eos_config:
+    parents:
+      - dhcp server
+      - subnet {{ item.network }}
+    lines:
+      - reservations
+
+- name: Set reservations
+  # when:
+    # - item.reservations is defined
+    # - item.0.network | ansible.utils.network_in_usable( item.1.addr )
+  loop: "{{ inventory_dhcp_pools | subelements('reservations') }}"
+  failed_when: false
+  arista.eos.eos_config:
+    parents:
+      - dhcp server
+      - subnet {{ item.0.network }}
+      - reservations
+    lines:
+      - mac-address {{ item.1.mac }}
+      - ipv4-address {{ item.1.addr }}

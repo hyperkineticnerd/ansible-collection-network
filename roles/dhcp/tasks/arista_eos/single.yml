@@ -17,20 +17,20 @@
   when: "item.reservations is defined"
   loop: "{{ inventory_dhcp_pools | subelements('reservations') }}"
   arista.eos.eos_config:
-    parents: 
+    parents:
       - dhcp server
-      -    subnet {{ inventory_dhcp_pools[0].network }}
-      -       reservations
+      - subnet {{ inventory_dhcp_pools.0.network }}
+      - reservations
     lines:
       - mac-address {{ item.1.mac }}
-      -    ipv4-address {{ item.1.addr }}
+      - ipv4-address {{ item.1.addr }}
 
 - name: Set subnet options
   loop: "{{ inventory_dhcp_pools[0] }}"
   arista.eos.eos_config:
-    parents: 
+    parents:
       - dhcp server
-      -    subnet {{ inventory_dhcp_pools[0].network }}
+      - subnet {{ inventory_dhcp_pools[0].network }}
     lines:
       - default-gateway {{ inventory_dhcp_pools[0].router[0] }}
       - dns server {{ inventory_dhcp_pools[0].dns | join(' ') }}

@@ -2,7 +2,7 @@
 # tasks file for dhcp
 - name: Arista EOS DHCP
   ansible.builtin.include_tasks: arista_eos/main.yml
-  when: 
+  when:
     - ansible_network_os == 'arista.eos.eos'
 
 # - name: Arista EOS DHCP

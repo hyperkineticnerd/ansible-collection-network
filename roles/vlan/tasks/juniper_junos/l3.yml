@@ -1,7 +1,7 @@
 ---
 # tasks file for vlan
 - name: Set L3
-  ignore_errors: true
+  failed_when: false
   junipernetworks.junos.junos_l3_interfaces:
     state: replaced
     config:

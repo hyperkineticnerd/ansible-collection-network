@@ -6,10 +6,10 @@
 
 - name: Set Domain
   community.network.icx_config:
-    lanes:
+    lines:
       - domain {{ domain_name }}
 
 - name: Set DNS Servers
   community.network.icx_config:
-    lanes:
+    lines:
       - dns-server {{ inventory_dns_servers[0:1] | join(' ') }}

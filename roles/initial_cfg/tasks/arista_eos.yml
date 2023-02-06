@@ -4,7 +4,7 @@
   arista.eos.eos_system:
     hostname: "{{ hostname }}"
     domain_name: "{{ domain_name }}"
-    domain_search: 
+    domain_search:
       - hkn.lab
     name_servers: "{{ inventory_dns_servers }}"
     state: present

@@ -8,11 +8,11 @@
       communities:
         - name: "{{ inventory_snmp.v2.community }}"
           authorization: "read-write"
-          clients: "{{ inventory_snmp.v2.clients }}"
+          # clients: "{{ inventory_snmp.v2.clients | default(omit) }}"
           view: all
         - name: public
           authorization: "read-only"
-          clients: "{{ inventory_snmp.v2.clients }}"
+          # clients: "{{ inventory_snmp.v2.clients | default(omit) }}"
       views:
         - name: all
           oids:
