@@ -9,11 +9,11 @@
         - name: "{{ inventory_snmp.v2.community }}"
           authorization: "read-write"
           # clients: "{{ inventory_snmp.v2.clients | default(omit) }}"
-          view: all
+          # view: all
         - name: public
           authorization: "read-only"
           # clients: "{{ inventory_snmp.v2.clients | default(omit) }}"
-      views:
-        - name: all
-          oids:
-            - oid: ".1"
+      # views:
+      #   - name: all
+      #     oids:
+      #       - oid: ".1"

@@ -10,4 +10,4 @@
           - address: "{{ item.subnets[0] }}"
           # - address: "{{ item.subnets[1] | default(omit) }}"
           #   secondary: true
-  with_items: "{{ inventory_vlans }}"
+  with_items: "{{ inventory_vlans | combine(device_vlans) }}"

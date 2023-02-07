@@ -4,7 +4,7 @@ dhcp server
         {% if subnet.reservations is defined %}
         reservations
             {% for dev in subnet.reservations %}
-            mac-address {{ dev.mac }}
+            mac-address {{ dev.mac | ansible.utils.hwaddr('cisco') }}
                 ipv4-address {{ dev.addr }}
             !
             {% endfor %}

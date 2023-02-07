@@ -9,8 +9,10 @@
   ansible.builtin.include_tasks: arista_eos/l2.yml
   when:
     - ansible_network_os == 'arista.eos.eos'
+    - not network_role_disable_l2
 
 # - name: Arista EOS Ethernet L3
 #   ansible.builtin.include_tasks: arista_eos/l3.yml
 #   when:
 #     - ansible_network_os == 'arista.eos.eos'
+#     - not network_role_disable_l3

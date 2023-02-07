@@ -9,3 +9,4 @@
   ansible.builtin.include_tasks: arista_eos/l3.yml
   when:
     - ansible_network_os == 'arista.eos.eos'
+    - not network_role_disable_l3

@@ -9,3 +9,4 @@
   ansible.builtin.include_tasks: juniper_junos/l3.yml
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'
+    - not network_role_disable_l3
