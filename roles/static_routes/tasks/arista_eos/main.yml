@@ -8,7 +8,9 @@
           - afi: ipv4
             routes:
               - dest: "{{ item.destination }}"
-                next_hop:
-                  - interface: "{{ item.route }}"
+                next_hops:
+                  - vrf: default
+                    interface: "{{ item.route }}"
+                    # description: default internet route
     state: replaced
   loop: "{{ inventory_static_routes }}"

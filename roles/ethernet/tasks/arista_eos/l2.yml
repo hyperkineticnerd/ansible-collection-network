@@ -5,7 +5,7 @@
     state: replaced
     config:
       - name: "{{ item.iface_name }}"
-        mode: "{{ item.port_mode }}"
+        mode: "{{ item.port_mode | default('trunk') }}"
         access:
           vlan: "{{ item.native_vlan_id | default(omit) }}"
         trunk:
