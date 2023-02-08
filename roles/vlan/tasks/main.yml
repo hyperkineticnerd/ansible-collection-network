@@ -5,7 +5,7 @@
   when:
     - ansible_network_os == 'arista.eos.eos'
 
-- name: Brocade ICX
-  ansible.builtin.include_tasks: brocade_icx/main.yml
-  when:
-    - ansible_network_os == 'community.network.icx'
+# - name: Brocade ICX
+#   ansible.builtin.include_tasks: brocade_icx/main.yml
+#   when:
+#     - ansible_network_os == 'community.network.icx'

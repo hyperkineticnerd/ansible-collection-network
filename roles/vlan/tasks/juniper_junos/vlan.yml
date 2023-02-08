@@ -7,4 +7,4 @@
       - name: "{{ item.name }}"
         vlan_id: "{{ item.vlan_id }}"
         # l3_interface: irb.{{ item.vlan_id }}
-  loop: "{{ inventory_vlans | combine(device_vlans) }}"
+  loop: "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"

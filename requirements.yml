@@ -7,4 +7,5 @@ collections:
   - cisco.ios
   - cisco.nxos
   - community.network
+  - community.general
   - junipernetworks.junos
