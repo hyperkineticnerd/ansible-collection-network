@@ -3,9 +3,9 @@ roles: []
   # - name:
   #   version:
 collections:
-  - arista.eos
-  - cisco.ios
-  - cisco.nxos
-  - community.network
-  - community.general
-  - junipernetworks.junos
+  - name: arista.eos
+  - name: cisco.ios
+  - name: cisco.nxos
+  - name: community.network
+  - name: community.general
+  - name: junipernetworks.junos
