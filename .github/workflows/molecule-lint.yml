@@ -12,20 +12,6 @@ jobs:
         with:
           path: "${{ github.repository }}"
 
-      # - name: setup python
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.9'
-
-      # - name: pip install
-      #   # uses: actions/setup-python@v4
-      #   # with:
-      #   #   python-version: '3.9'
-      #   run: |
-      #     pip3 install -U pip
-      #     pip3 install netaddr
-      #     pip3 install passlib
-
       - name: molecule
         uses: hyperkineticnerd/github-action-molecule@master
         with:
