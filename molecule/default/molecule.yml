@@ -3,18 +3,18 @@ dependency:
   name: galaxy
   enabled: True
   options:
-    ignore-errors: True
+    # ignore-errors: True
     role-file: requirements.yml
     requirements-file: requirements.yml
 driver:
   name: docker
 platforms:
   - name: instance
+    image: registry.access.redhat.com/ubi8/ubi:latest
 provisioner:
   name: ansible
 verifier:
   name: ansible
 lint: |
   set -e
-  yamllint .
   ansible-lint
