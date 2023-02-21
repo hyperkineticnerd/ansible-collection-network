@@ -1,0 +1,15 @@
+---
+# tasks file for ethernet
+- name: Set Switch Port
+  cisco.ios.ios_l2_interfaces:
+    state: replaced
+    config:
+      - name: "{{ item.iface_name }}"
+        mode: "{{ item.port_mode | default('trunk') }}"
+        access:
+          vlan: "{{ item.native_vlan_id | default(omit) }}"
+        trunk:
+          encapsulation: dot1q
+          native_vlan: "{{ item.native_vlan_id | default(omit) }}"
+  loop: "{{ device_lan_ports }}"
+  when: item.port_mode == 'trunk' 

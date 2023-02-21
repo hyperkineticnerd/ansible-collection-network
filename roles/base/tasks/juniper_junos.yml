@@ -1,15 +1,6 @@
 ---
-- name: Set Hostname
-  junipernetworks.junos.junos_command:
-    commands:
-      - set system host-name {{ hostname }}
-
-- name: Set Domain
-  junipernetworks.junos.junos_command:
-    commands:
-      - set system domain-name {{ domain_name }}
-
-- name: Set DNS Servers
-  junipernetworks.junos.junos_command:
-    commands:
-      - set name-server {{ inventory_dns_servers[0:1] | join(' ') }}
+- name: Set System
+  junipernetworks.junos.junos_system:
+    hostname: "{{ inventory_hostname }}"
+    domain_name: network.hkn.lab
+    name_servers: "{{ inventory_dns_servers }}"

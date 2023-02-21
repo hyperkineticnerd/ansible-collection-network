@@ -1,0 +1,13 @@
+# username admin privilege 15 password 0 M$RK0f7heN!NJA
+
+# aaa new-model
+# aaa authentication login default local enable
+
+# ip ssh authentication-retries 5
+
+# ip default-gateway 172.16.0.3
+# ip classless
+# ip route 0.0.0.0 0.0.0.0 172.16.0.3
+# ip http server
+# ip http secure-server
+---

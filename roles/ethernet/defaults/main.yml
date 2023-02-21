@@ -1,2 +1,4 @@
 ---
 # defaults file for ethernet
+network_role_disable_l2: false
+network_role_disable_l3: false

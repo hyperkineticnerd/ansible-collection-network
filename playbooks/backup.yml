@@ -25,6 +25,18 @@
           filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
           dir_path: ./backup
 
+- name: Backup Cisco IOS
+  hosts: cisco_ios
+  gather_facts: false
+  tasks:
+    - name: Run backup
+      cisco.ios.ios_config:
+        backup: true
+        backup_options:
+          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+          dir_path: ./backup
+      when: ansible_network_os == 'cisco.ios.ios'
+
 # - name: Backup Arista
 #   hosts: brocade
 #   gather_facts: false

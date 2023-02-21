@@ -1,6 +1,6 @@
 galaxy_info:
   author: Sean Nelson
-  description: TFTP Server configuration on DHCP Server
+  description: Role to setup AAA on Switches
   # company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the

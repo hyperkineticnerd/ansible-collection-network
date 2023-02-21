@@ -5,6 +5,11 @@
   when:
     - ansible_network_os == 'arista.eos.eos'
 
+- name: Cisco IOS
+  ansible.builtin.include_tasks: cisco_ios/main.yml
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+
 # - name: Brocade ICX
 #   ansible.builtin.include_tasks: brocade_icx/main.yml
 #   when:

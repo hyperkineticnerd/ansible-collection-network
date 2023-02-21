@@ -1,0 +1,10 @@
+---
+# tasks file for ethernet
+- name: Set Ethernet
+  arista.eos.eos_interfaces:
+    state: replaced
+    config:
+      - name: "{{ item.iface_name }}"
+        description: "{{ item.port_name }}"
+        mode: layer2
+  loop: "{{ device_lan_ports }}"
