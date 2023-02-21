@@ -13,6 +13,6 @@ jobs:
           path: "${{ github.repository }}"
 
       - name: molecule
-        uses: robertdebock/molecule-action@5.0.2
+        uses: hyperkineticnerd/github-action-molecule@master
         with:
           command: lint
