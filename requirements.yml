@@ -5,7 +5,7 @@ roles: []
 collections:
   - name: arista.eos
   - name: cisco.ios
-  - name: cisco.nxos
+  # - name: cisco.nxos
   - name: community.network
   - name: community.general
   - name: junipernetworks.junos
