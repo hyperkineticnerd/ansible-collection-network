@@ -4,6 +4,10 @@
   ansible.builtin.include_tasks: arista_eos.yml
   when: ansible_network_os == 'arista.eos.eos'
 
+- name: Set Base Configuration for Cisco IOS
+  ansible.builtin.include_tasks: cisco_ios.yml
+  when: ansible_network_os == 'cisco.ios.ios'
+
 - name: Set Base Configuration for Brocade ICX
   ansible.builtin.include_tasks: brocade_icx.yml
   when: ansible_network_os == 'community.network.icx'

@@ -1,0 +1,10 @@
+---
+# tasks file for users
+- name: Add User
+  cisco.ios.ios_user:
+    name: "{{ item.user }}"
+    privilege: "{{ item.privilege }}"
+    configured_password: "{{ item.password }}"
+    password_type: "password"
+    sshkey: "{{ default(omit) }}"
+  loop: "{{ inventory_users }}"

@@ -1,0 +1,18 @@
+---
+# tasks file for ethernet
+- name: Cisco IOS Ethernet Interfaces
+  ansible.builtin.include_tasks: cisco_ios/ethernet.yml
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+
+- name: Cisco IOS Ethernet L2
+  ansible.builtin.include_tasks: cisco_ios/l2.yml
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+    - not network_role_disable_l2
+
+# - name: Cisco IOS Ethernet L3
+#   ansible.builtin.include_tasks: cisco_ios/l3.yml
+#   when:
+#     - ansible_network_os == 'cisco.ios.ios'
+#     - not network_role_disable_l3

@@ -1,0 +1,13 @@
+---
+# tasks file for vlan
+- name: Set L3
+  failed_when: false
+  cisco.ios.ios_l3_interfaces:
+    state: rendered
+    config:
+      - name: "Vlan {{ item.vlan_id }}"
+        ipv4:
+          - address: "{{ item.subnets[0] }}"
+          # - address: "{{ item.subnets[1] | default(omit) }}"
+          #   secondary: true
+  loop: "{{ [inventory_vlans,device_vlans] | community.general.lists_mergeby('name') }}"

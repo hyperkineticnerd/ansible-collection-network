@@ -1,0 +1,19 @@
+---
+# tasks file for vlan
+- name: VLAN Transparency Mode
+  cisco.ios.ios_config:
+    lines:
+      - vtp mode transparent
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+
+- name: Cisco IOS VLANs
+  ansible.builtin.include_tasks: cisco_ios/vlan.yml
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+
+- name: Cisco IOS VLAN L3
+  ansible.builtin.include_tasks: cisco_ios/l3.yml
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+    - not network_role_disable_l3
