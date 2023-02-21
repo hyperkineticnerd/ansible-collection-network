@@ -10,7 +10,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: registry.access.redhat.com/ubi8/ubi:latest
+    image: registry.access.redhat.com/ubi9/ubi:latest
 provisioner:
   name: ansible
 verifier:
