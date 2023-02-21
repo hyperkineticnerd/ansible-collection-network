@@ -1,7 +1,7 @@
 ---
 dependency:
   name: galaxy
-  enabled: False
+  enabled: True
   options:
     ignore-errors: True
     role-file: requirements.yml
