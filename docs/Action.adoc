@@ -1,0 +1,165 @@
+= Setting up Molecule GitHub Action for Testing
+
+== Container build
+
+[source]
+-----
+FROM registry.access.redhat.com/ubi9/ubi
+
+LABEL maintainer="Sean Nelson <hyperkineticnerd@gmail.com>"
+LABEL build_date="2023-02-21"
+
+WORKDIR /github/workspace
+
+RUN dnf install -y docker \
+                   gcc \
+                   git-core \
+                   python3-devel \
+                   python3-libselinux \
+                   python3-jmespath \
+                   python3-pip \
+                   rsync ; \
+    dnf clean all
+
+ADD requirements.txt /requirements.txt
+RUN python3 -m pip install -r /requirements.txt && \
+    python3 -m pip cache purge
+
+ADD cmd.sh /cmd.sh
+CMD sh /cmd.sh
+----
+
+[source]
+-----
+ansible~=7.2.0
+ansible-lint~=6.13.1
+docker~=6.0.1
+molecule~=4.0.4
+molecule-docker~=2.1.0
+tox~=4.4.5
+testinfra~=6.0.0
+yamllint~=1.29.0
+netaddr~=0.8.0
+passlib~=1.7.4
+-----
+
+[source]
+-----
+#!/bin/sh
+
+echo "ACTION: Welcome to the molecule action."
+
+# A function to retry an action a few times until succesful.
+retry() {
+  counter=0
+  until "$@" ; do
+    exit=$?
+    counter=$((counter + 1))
+    echo "ACTION: Retry attempt ${counter}."
+    if [ "$counter" -ge "${max_failures:-3}" ] ; then
+      return $exit
+    fi
+  done
+  return 0
+}
+
+# Go into the repository or assume it's here. (`.`)
+cd "${GITHUB_REPOSITORY:-.}" || exit
+
+# Test the role.
+if [ -f tox.ini ] && [ "${command:-test}" = test ] ; then
+  # If `tox.ini` exists, run tox.
+  # (Tox will run molecule with a specified Ansible version.)
+  echo "ACTION: Running (retry) tox."
+  retry tox
+else
+  # No `tox.ini`?, just run molecule.
+  echo "ACTION: Running (retry) molecule."
+  PY_COLORS=1 ANSIBLE_FORCE_COLOR=1 retry molecule "${command:-test}" --scenario-name "${scenario:-default}"
+fi || status="failed"
+
+# Finish with the correct failure code.
+if [ "${status}" = "failed" ] ; then
+  echo "ACTION: Thanks for using this action, good luck troubleshooting."
+  exit 1
+else
+  echo "ACTION: Thanks for using this action."
+fi
+-----
+
+== GitHub Action
+
+[source]
+-----
+---
+name: Test Ansible roles with Molecule
+description: Run Molecule to test Ansible roles
+author: Sean Nelson <hyperkineticnerd@gmail.com>
+
+inputs:
+  namespace:
+    description: The [Docker Hub](https://hub.docker.com/) namespace where the image can be found. Defaults to `hyperkineticnerd`.
+    required: false
+    default: hyperkineticnerd
+  image:
+    description: The image you want to run on. Defaults to `ubi`.
+    required: false
+    default: ubi
+  tag:
+    description: The tag of the container image to use. Defaults to `latest`.
+    required: false
+    default: latest
+  options:
+    description: Options you can pass to [`tox`](https://tox.readthedocs.io/en/latest/), for example `--parallel all`.
+    required: false
+  command:
+    description: What command to pass to [molecule](https://molecule.readthedocs.io/en/latest/), for example `lint` or `syntax`. Defaults to `test`.
+    required: false
+    default: test
+  scenario:
+    description: The molecule scenario to run. Default to `default`.
+    required: false
+    default: default
+
+runs:
+  using: docker
+  image: 'docker://ghcr.io/hyperkineticnerd/github-action-molecule'
+  env:
+    ANSIBLE_ROLES_PATH: "../"
+    ANSIBLE_ASYNC_DIR: "/tmp/.ansible_async"
+    namespace: ${{ inputs.namespace }}
+    image: ${{ inputs.image }}
+    tag: ${{ inputs.tag }}
+    options: ${{ inputs.options }}
+    command: ${{ inputs.command }}
+    scenario: ${{ inputs.scenario }}
+
+branding:
+  icon: play
+  color: green
+-----
+
+
+== GitHub Workflow/Job
+
+[source]
+-----
+name: molecule-lint
+run-name: Ansible Molecule Linting
+on:
+  push:
+
+jobs:
+  molecule-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          path: "${{ github.repository }}"
+
+      - name: molecule
+        uses: hyperkineticnerd/github-action-molecule@master
+        with:
+          command: lint
+-----
