@@ -2,6 +2,8 @@ name: molecule-lint
 run-name: Ansible Molecule Linting
 on:
   push:
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   molecule-lint:
