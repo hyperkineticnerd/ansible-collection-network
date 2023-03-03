@@ -1,12 +1,12 @@
 ---
 # tasks file for vlan
-- name: Arista EOS VLANs
-  ansible.builtin.include_tasks: arista_eos/vlan.yml
+- name: Arista EOS - VLAN
   when:
     - ansible_network_os == 'arista.eos.eos'
+  ansible.builtin.include_tasks: arista_eos/vlan.yml
 
-- name: Arista EOS VLAN L3
-  ansible.builtin.include_tasks: arista_eos/l3.yml
+- name: Arista EOS - VLAN L3
   when:
     - ansible_network_os == 'arista.eos.eos'
     - not network_role_disable_l3
+  ansible.builtin.include_tasks: arista_eos/l3.yml

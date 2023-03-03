@@ -1,14 +1,14 @@
 ---
 # tasks file for vlan
 - name: Arista EOS
-  ansible.builtin.include_tasks: arista_eos/main.yml
   when:
     - ansible_network_os == 'arista.eos.eos'
+  ansible.builtin.include_tasks: arista_eos/main.yml
 
 - name: Cisco IOS
-  ansible.builtin.include_tasks: cisco_ios/main.yml
   when:
     - ansible_network_os == 'cisco.ios.ios'
+  ansible.builtin.include_tasks: cisco_ios/main.yml
 
 # - name: Brocade ICX
 #   ansible.builtin.include_tasks: brocade_icx/main.yml

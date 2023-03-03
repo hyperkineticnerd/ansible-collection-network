@@ -1,0 +1,7 @@
+---
+# tasks file for base
+- name: Juniper Junos - Base Configuration - Set System
+  junipernetworks.junos.junos_system:
+    hostname: "{{ inventory_hostname }}"
+    domain_name: network.hkn.lab
+    name_servers: "{{ inventory_dns_servers }}"

@@ -1,0 +1,18 @@
+---
+# tasks file for power_over_ethernet
+- name: Arista EOS - POE Interfaces
+  when:
+    - ansible_network_os == 'arista.eos.eos'
+  ansible.builtin.include_tasks: arista_eos/ethernet.yml
+
+- name: Arista EOS - POE Interfaces L2
+  when:
+    - ansible_network_os == 'arista.eos.eos'
+    - not network_role_disable_l2
+  ansible.builtin.include_tasks: arista_eos/l2.yml
+
+# - name: Arista EOS - POE Interfaces L3
+#   when:
+#     - ansible_network_os == 'arista.eos.eos'
+#     - not network_role_disable_l3
+#   ansible.builtin.include_tasks: arista_eos/l3.yml

@@ -1,5 +1,5 @@
 ---
-- name: Configure SNMP Server
+- name: Juniper SRX - SNMP - Set
   arista.eos.eos_snmp_server:
     state: rendered
     config:

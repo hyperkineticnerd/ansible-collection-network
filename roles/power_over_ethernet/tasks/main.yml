@@ -1,2 +1,6 @@
 ---
 # tasks file for power_over_ethernet
+- name: Arista EOS
+  when:
+    - ansible_network_os == 'arista.eos.eos'
+  ansible.builtin.include_tasks: arista_eos/main.yml
