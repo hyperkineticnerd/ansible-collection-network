@@ -1,0 +1,30 @@
+---
+# tasks file for port_forward
+- name: Set port forward for {{ port_forward_name }}
+  junipernetworks.junos.junos_config:
+    lines:
+      - edit security nat destination
+      - set pool {{ port_forward_name }} address {{ port_forward_address }} port {{ port_forward_dst_port }}
+      - edit rule-set {{ port_forward_rule_set }}
+      - set from zone {{ port_forward_from_zone }}
+      - edit rule {{ port_forward_name }}
+      - set match destination-address 0.0.0.0/0
+      - set match destination-port {{ port_forward_dst_port }}
+      - set then destination-nat pool {{ port_forward_name }}
+      - exit
+      - exit
+      - exit
+
+      - edit applications application {{ port_forward_name }}
+      - set destination-port {{ port_forward_dst_port }}
+      - set protocol {{ port_forward_protocol }}
+      - exit
+
+      - edit security policies from-zone {{ port_forward_from_zone }} to-zone {{ port_forward_target_zone }}
+      - edit policy {{ port_forward_policy }}
+      - set match source-address any
+      - set match destination-address {{ port_forward_target_host }}
+      - set match application {{ port_forward_name }}
+      - set then permit
+      - exit
+      - exit

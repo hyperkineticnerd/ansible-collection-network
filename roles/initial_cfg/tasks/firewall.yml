@@ -1,0 +1,34 @@
+---
+- name: Assigne IP address for untrust interface
+  junipernetworks.junos.junos_command:
+    commands:
+      - set interface ge-0/0/0 unit 0 family inet address {{ external_ip }}
+
+- name: Assign IP address for trust interface
+  junipernetworks.junos.junos_command:
+    commands:
+      - set interface ge-0/0/1 unit 0 family inet address {{ internal_ip }}
+
+- name: Configure default route
+  junipernetworks.junos.junos_command:
+    commands:
+      - ip route 0.0.0.0/0 {{ gateway }}
+
+- name: Create untrust zone and assign interface
+  junipernetworks.junos.junos_command:
+    commands:
+      - set security zones security-zone untrust interfaces ge-0/0/0.0
+
+- name: Create trust zone and assign interface
+  junipernetworks.junos.junos_command:
+    commands:
+      - set security zones security-zone trust interfaces ge-0/0/1.0
+      - set system services ssh
+      - set security zones security-zone trust host-inbound-traffic system-services ssh
+      - set security zones security-zone trust host-inbound-traffic system-services http
+      - set system services web-management https system-generated-certificate
+      - set security zones security-zone trust host-inbound-traffic system-services https
+
+- name: Configure Firewall policy
+  junipernetworks.junos.junos_command:
+    commands:

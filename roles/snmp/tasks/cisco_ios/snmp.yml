@@ -1,0 +1,12 @@
+---
+- name: Configure SNMP Server
+  cisco.ios.ios_snmp_server:
+    state: rendered
+    config:
+      contact: "{{ inventory_snmp.contact }}"
+      location: "{{ inventory_snmp.location }}"
+      communities:
+        - name: "{{ inventory_snmp.v2.community }}"
+          rw: true
+        - name: public
+          ro: true
