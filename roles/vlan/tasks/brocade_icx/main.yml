@@ -1,12 +1,12 @@
 ---
 # tasks file for vlan
-- name: Brocade ICX VLANs
-  ansible.builtin.include_tasks: brocade_icx/vlan.yml
+- name: Brocade ICX - VLAN
   when:
     - ansible_network_os == 'community.network.icx'
+  ansible.builtin.include_tasks: brocade_icx/vlan.yml
 
-- name: Brocade ICX VLAN L3
-  ansible.builtin.include_tasks: brocade_icx/l3.yml
+- name: Brocade ICX - VLAN L3
   when:
     - ansible_network_os == 'community.network.icx'
     - not network_role_disable_l3
+  ansible.builtin.include_tasks: brocade_icx/l3.yml

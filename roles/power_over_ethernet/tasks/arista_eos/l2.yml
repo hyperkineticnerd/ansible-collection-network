@@ -1,0 +1,14 @@
+---
+# tasks file for power_over_ethernet
+- name: Arista EOS - POE Interfaces L2 - Set
+  loop: "{{ device_lan_ports }}"
+  arista.eos.eos_l2_interfaces:
+    state: replaced
+    config:
+      - name: "{{ item.iface_name }}"
+        mode: "{{ item.port_mode | default('trunk') }}"
+        access:
+          vlan: "{{ item.native_vlan_id | default(omit) }}"
+        trunk:
+          native_vlan: "{{ item.native_vlan_id | default(omit) }}"
+          trunk_allowed_vlans: "{{ item.allowed_vlan_ids | default(omit) }}"

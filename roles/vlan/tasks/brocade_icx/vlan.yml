@@ -1,10 +1,11 @@
 ---
 # tasks file for vlan
-- name: Set VLANs
+- name: Brocade ICX - VLAN - Set
+  loop: 
+    - "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"
   community.network.icx_vlan:
     state: present
     aggregate:
       - name: "{{ item.name }}"
         vlan_id: "{{ item.vlan_id }}"
         state: present
-  loop: "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"

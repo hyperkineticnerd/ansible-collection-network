@@ -1,7 +1,7 @@
 ---
 # tasks file for initial_cfg
-- name: Set Basic System Cfg
-  junipernetworks.junos.junos_system:
+- name: Arista EOS - Initial Cfg - Set Basic System
+  arista.eos.eos_system:
     hostname: "{{ hostname }}"
     domain_name: "{{ domain_name }}"
     domain_search:
@@ -9,11 +9,12 @@
     name_servers: "{{ inventory_dns_servers }}"
     state: present
 
-- name: Set Admin Cfg
-  junipernetworks.junos.junos_user:
+- name: Arista EOS - Initial Cfg - Set Admin User
+  arista.eos.eos_user:
     aggregate:
       - name: admin
-        role: "super-user"
+        privilege: 15
         # sshkey: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
-        encrypted_password: "{{ admin_password | password_hash('sha512') }}"
+        configured_password: "{{ admin_password }}"
+        update_password: always
         state: present

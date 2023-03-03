@@ -1,0 +1,18 @@
+---
+# tasks file for power_over_ethernet
+- name: Cisco IOS - POE Interfaces
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+  ansible.builtin.include_tasks: cisco_ios/ethernet.yml
+
+- name: Cisco IOS - POE Interfaces L2
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+    - not network_role_disable_l2
+  ansible.builtin.include_tasks: cisco_ios/l2.yml
+
+- name: Cisco IOS - POE Interfaces L3
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+    - not network_role_disable_l3
+  ansible.builtin.include_tasks: cisco_ios/l3.yml

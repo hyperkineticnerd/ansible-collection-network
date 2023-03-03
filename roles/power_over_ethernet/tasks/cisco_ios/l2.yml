@@ -1,0 +1,17 @@
+---
+# tasks file for power_over_ethernet
+- name: Cisco IOS - POE Interfaces L2 - Set
+  when: 
+    - item.port_mode == 'trunk' 
+  loop: 
+    - "{{ device_lan_ports }}"
+  cisco.ios.ios_l2_interfaces:
+    state: replaced
+    config:
+      - name: "{{ item.iface_name }}"
+        mode: "{{ item.port_mode | default('trunk') }}"
+        access:
+          vlan: "{{ item.native_vlan_id | default(omit) }}"
+        trunk:
+          encapsulation: dot1q
+          native_vlan: "{{ item.native_vlan_id | default(omit) }}"

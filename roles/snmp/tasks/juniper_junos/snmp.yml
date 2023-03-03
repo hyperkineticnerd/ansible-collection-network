@@ -1,5 +1,5 @@
 ---
-- name: Configure SNMP Server
+- name: Arista EOS - SNMP - Set
   junipernetworks.junos.junos_snmp_server:
     state: rendered
     config:

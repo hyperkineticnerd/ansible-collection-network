@@ -1,6 +1,6 @@
 ---
 # tasks file for initial_cfg
-- name: Set Basic System Cfg
+- name: Brocade ICX - Initial Cfg - Set Basic System
   community.network.icx_system:
     hostname: "{{ hostname }}"
     domain_name: "{{ domain_name }}"
@@ -9,7 +9,7 @@
     name_servers: "{{ inventory_dns_servers }}"
     state: present
 
-- name: Set Admin Cfg
+- name: Brocade ICX - Initial Cfg - Set Admin User
   community.network.icx_user:
     aggregate:
       - name: admin

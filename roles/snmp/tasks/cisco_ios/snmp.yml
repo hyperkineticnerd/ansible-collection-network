@@ -1,5 +1,5 @@
 ---
-- name: Configure SNMP Server
+- name: Cisco IOS - SNMP - Set
   cisco.ios.ios_snmp_server:
     state: rendered
     config:

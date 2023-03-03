@@ -1,17 +1,21 @@
 ---
 # tasks file for base
-- name: Set Base Configuration for Arista EOS
-  ansible.builtin.include_tasks: arista_eos.yml
-  when: ansible_network_os == 'arista.eos.eos'
+- name: Arista EOS - Base Configuration
+  when: 
+    - ansible_network_os == 'arista.eos.eos'
+  ansible.builtin.include_tasks: arista_eos/main.yml
 
-- name: Set Base Configuration for Cisco IOS
-  ansible.builtin.include_tasks: cisco_ios.yml
-  when: ansible_network_os == 'cisco.ios.ios'
+- name: Brocade ICX - Base Configuration
+  when: 
+    - ansible_network_os == 'community.network.icx'
+  ansible.builtin.include_tasks: brocade_icx/main.yml
 
-- name: Set Base Configuration for Brocade ICX
-  ansible.builtin.include_tasks: brocade_icx.yml
-  when: ansible_network_os == 'community.network.icx'
+- name: Cisco IOS - Base Configuration
+  when: 
+    - ansible_network_os == 'cisco.ios.ios'
+  ansible.builtin.include_tasks: cisco_ios/main.yml
 
-- name: Set Base Configuration for Juniper Junos
-  ansible.builtin.include_tasks: juniper_junos.yml
-  when: ansible_network_os == 'junipernetworks.junos.junos'
+- name: Juniper Junos - Base Configuration
+  when: 
+    - ansible_network_os == 'junipernetworks.junos.junos'
+  ansible.builtin.include_tasks: juniper_junos/main.yml

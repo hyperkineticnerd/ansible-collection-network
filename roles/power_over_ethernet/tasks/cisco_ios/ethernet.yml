@@ -1,0 +1,11 @@
+---
+# tasks file for power_over_ethernet
+- name: Cisco IOS - POE Interfaces - Set
+  loop: 
+    - "{{ device_lan_ports }}"
+  arista.eos.eos_interfaces:
+    state: replaced
+    config:
+      - name: "{{ item.iface_name }}"
+        description: "{{ item.port_name }}"
+        mode: layer2
