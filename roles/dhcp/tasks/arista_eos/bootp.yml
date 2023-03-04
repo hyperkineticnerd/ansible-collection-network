@@ -1,7 +1,7 @@
 ---
 # tasks file for tftp
 - name: Set tftp server option
-  loop: "{{ inventory_tftp_config | subelements('tftp_config') }}"
+  with_items: "{{ inventory_tftp_config | subelements('tftp_config') }}"
   when:
     - (item.1.option is defined)
   failed_when: false
@@ -13,7 +13,7 @@
       - tftp server option {{ item.1.option }} {{ item.1.server }}
 
 - name: Set tftp file option
-  loop: "{{ inventory_tftp_config | subelements('tftp_config') }}"
+  with_items: "{{ inventory_tftp_config | subelements('tftp_config') }}"
   when:
     - (item.1.file is defined)
   failed_when: false

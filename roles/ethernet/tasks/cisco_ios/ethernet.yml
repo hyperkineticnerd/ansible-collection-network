@@ -7,4 +7,4 @@
       - name: "{{ item.iface_name }}"
         description: "{{ item.port_name }}"
         mode: layer2
-  loop: "{{ device_lan_ports }}"
+  with_items: "{{ device_lan_ports }}"

@@ -2,10 +2,10 @@
 # tasks file for vlan
 - name: Cisco IOS - VLAN L3 - Set
   failed_when: false
-  loop: 
+  with_items: 
     - "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"
   cisco.ios.ios_l3_interfaces:
-    state: rendered
+    state: replaced
     config:
       - name: "Vlan {{ item.vlan_id }}"
         ipv4:

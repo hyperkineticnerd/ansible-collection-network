@@ -11,4 +11,4 @@
         trunk:
           native_vlan: "{{ item.native_vlan_id | default(omit) }}"
           trunk_allowed_vlans: "{{ item.allowed_vlan_ids | default(omit) }}"
-  loop: "{{ device_lan_ports }}"
+  with_items: "{{ device_lan_ports }}"

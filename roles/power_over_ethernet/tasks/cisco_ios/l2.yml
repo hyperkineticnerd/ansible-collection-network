@@ -3,7 +3,7 @@
 - name: Cisco IOS - POE Interfaces L2 - Set
   when: 
     - item.port_mode == 'trunk' 
-  loop: 
+  with_items: 
     - "{{ device_lan_ports }}"
   cisco.ios.ios_l2_interfaces:
     state: replaced

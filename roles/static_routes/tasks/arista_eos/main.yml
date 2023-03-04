@@ -13,4 +13,4 @@
                     interface: "{{ item.route }}"
                     # description: default internet route
     state: replaced
-  loop: "{{ inventory_static_routes }}"
+  with_items: "{{ inventory_static_routes }}"

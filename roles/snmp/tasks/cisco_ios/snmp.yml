@@ -10,3 +10,5 @@
           rw: true
         - name: public
           ro: true
+      groups: "{{ inventory_snmp.groups | default(omit) }}"
+      hosts: "{{ inventory_snmp.hosts | default(omit) }}"
