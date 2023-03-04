@@ -6,7 +6,7 @@
       - dhcp server
 
 - name: Create dhcp subnet
-  loop: "{{ inventory_dhcp_pools }}"
+  with_items: "{{ inventory_dhcp_pools }}"
   arista.eos.eos_config:
     parents:
       - dhcp server
@@ -14,7 +14,7 @@
       - subnet {{ item.network }}
 
 - name: Set subnet options
-  loop: "{{ inventory_dhcp_pools }}"
+  with_items: "{{ inventory_dhcp_pools }}"
   arista.eos.eos_config:
     parents:
       - dhcp server
@@ -25,7 +25,7 @@
       - range {{ item.range.low }} {{ item.range.high }}
 
 - name: Create reservations pool
-  loop: "{{ inventory_dhcp_pools }}"
+  with_items: "{{ inventory_dhcp_pools }}"
   arista.eos.eos_config:
     parents:
       - dhcp server
@@ -37,7 +37,7 @@
   when:
     # - item.reservations is defined
     - item.0.network | ansible.utils.network_in_usable( item.1.addr )
-  loop: "{{ inventory_dhcp_pools | subelements('reservations') }}"
+  with_items: "{{ inventory_dhcp_pools | subelements('reservations') }}"
   failed_when: false
   arista.eos.eos_config:
     parents:

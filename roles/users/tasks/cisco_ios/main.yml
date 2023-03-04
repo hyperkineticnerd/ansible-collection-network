@@ -7,4 +7,4 @@
     configured_password: "{{ item.password }}"
     password_type: "password"
     sshkey: "{{ default(omit) }}"
-  loop: "{{ inventory_users }}"
+  with_items: "{{ inventory_users }}"

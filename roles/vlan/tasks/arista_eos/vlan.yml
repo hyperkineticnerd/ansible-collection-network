@@ -1,7 +1,7 @@
 ---
 # tasks file for vlan
 - name: Arista EOS - VLAN - Set
-  loop: 
+  with_items:
     - "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"
   arista.eos.eos_vlans:
     state: replaced

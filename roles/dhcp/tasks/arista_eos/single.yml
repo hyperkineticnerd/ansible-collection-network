@@ -6,7 +6,7 @@
       - dhcp server
 
 - name: Create dhcp subnet
-  loop: "{{ inventory_dhcp_pools[0] }}"
+  with_items: "{{ inventory_dhcp_pools[0] }}"
   arista.eos.eos_config:
     parents:
       - dhcp server
@@ -15,7 +15,7 @@
 
 - name: Set reservations
   when: "item.reservations is defined"
-  loop: "{{ inventory_dhcp_pools | subelements('reservations') }}"
+  with_items: "{{ inventory_dhcp_pools | subelements('reservations') }}"
   arista.eos.eos_config:
     parents:
       - dhcp server
@@ -26,7 +26,7 @@
       - ipv4-address {{ item.1.addr }}
 
 - name: Set subnet options
-  loop: "{{ inventory_dhcp_pools[0] }}"
+  with_items: "{{ inventory_dhcp_pools[0] }}"
   arista.eos.eos_config:
     parents:
       - dhcp server

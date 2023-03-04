@@ -1,7 +1,7 @@
 ---
 # tasks file for power_over_ethernet
 - name: Arista EOS - POE Interfaces L2 - Set
-  loop: "{{ device_lan_ports }}"
+  with_items: "{{ device_lan_ports }}"
   arista.eos.eos_l2_interfaces:
     state: replaced
     config:

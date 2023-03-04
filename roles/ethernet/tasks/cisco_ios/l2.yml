@@ -11,5 +11,5 @@
         trunk:
           encapsulation: dot1q
           native_vlan: "{{ item.native_vlan_id | default(omit) }}"
-  loop: "{{ device_lan_ports }}"
+  with_items: "{{ device_lan_ports }}"
   when: item.port_mode == 'trunk' 
