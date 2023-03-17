@@ -8,3 +8,4 @@
     password_type: "password"
     sshkey: "{{ default(omit) }}"
   with_items: "{{ inventory_users }}"
+  no_log: true
