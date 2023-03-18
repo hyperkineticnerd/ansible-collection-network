@@ -1,5 +1,5 @@
 ---
-name: Create new release
+name: Cut release
 
 on:
   push:

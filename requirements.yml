@@ -4,8 +4,25 @@ roles: []
   #   version:
 collections:
   - name: arista.eos
+    # version: 6.0.0
+    type: galaxy
+
   - name: cisco.ios
-  # - name: cisco.nxos
-  - name: community.network
+    # version: 4.3.1
+    type: galaxy
+
+  - name: cisco.nxos
+    # version: 4.0.1
+    type: galaxy
+
   - name: community.general
+    # version: 6.0.0
+    type: galaxy
+
+  - name: community.network
+    # version: 5.0.0
+    type: galaxy
+
   - name: junipernetworks.junos
+    # version: 4.1.0
+    type: galaxy
