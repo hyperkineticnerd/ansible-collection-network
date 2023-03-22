@@ -1,0 +1,24 @@
+---
+- name: TAC test
+  hosts: cisco
+  gather_facts: false
+  tasks:
+    - name: Backup Full Configuration
+      cisco.ios.ios_config:
+        backup: true
+        backup_options:
+          dir_path: ./backups
+
+    - name: Capture SNMP Configuration
+      cisco.ios.ios_snmp_server:
+        state: gathered
+
+    - name: Render SNMP Configuration # noqa: args[module]
+      cisco.ios.ios_snmp_server:
+        state: rendered
+        config: "{{ inventory_snmp }}"
+
+    - name: Set SNMP Configuration # noqa: args[module]
+      cisco.ios.ios_snmp_server:
+        # state: replaced
+        config: "{{ inventory_snmp }}"

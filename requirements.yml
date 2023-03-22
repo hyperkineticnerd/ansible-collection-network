@@ -1,7 +1,4 @@
 ---
-roles: []
-  # - name:
-  #   version:
 collections:
   - name: arista.eos
     # version: 6.0.0
@@ -26,3 +23,7 @@ collections:
   - name: junipernetworks.junos
     # version: 4.1.0
     type: galaxy
+
+roles: []
+  # - name:
+  #   version:
