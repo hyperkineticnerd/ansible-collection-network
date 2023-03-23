@@ -1,49 +1,37 @@
 #!/usr/bin/ansible-playbook
 ---
-- name: Backup Juniper
-  hosts: juniper
+- name: Backup Network Config
+  hosts: all
   gather_facts: false
   tasks:
-    - name: Run backup
-      # connection: netconf
+    - name: Run Juniper backup
+      when: ansible_network_os == 'arista.eos.eos'
       junipernetworks.junos.junos_config:
         backup: true
         backup_options:
           filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
-          dir_path: ./backup
+          dir_path: ./backups
           backup_format: text
 
-- name: Backup Arista
-  hosts: arista
-  gather_facts: false
-  tasks:
-    - name: Run backup
-      # connection: netconf
+    - name: Run Arista EOS backup
+      when: ansible_network_os == 'arista.eos.eos'
       arista.eos.eos_config:
         backup: true
         backup_options:
           filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
-          dir_path: ./backup
+          dir_path: ./backups
 
-- name: Backup Cisco IOS
-  hosts: cisco_ios
-  gather_facts: false
-  tasks:
-    - name: Run backup
+    - name: Run Cisco IOS backup
+      when: ansible_network_os == 'cisco.ios.ios'
       cisco.ios.ios_config:
         backup: true
         backup_options:
           filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
-          dir_path: ./backup
-      when: ansible_network_os == 'cisco.ios.ios'
+          dir_path: ./backups
 
-# - name: Backup Arista
-#   hosts: brocade
-#   gather_facts: false
-#   tasks:
-#     - name: Run backup
-#       # connection: netconf
-#       community.network.icx_config:
-#         backup: true
-#         backup_options:
-#           filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+    # - name: Run backup
+    #   # connection: netconf
+    #   community.network.icx_config:
+    #     backup: true
+    #     backup_options:
+    #       filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
