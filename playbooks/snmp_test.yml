@@ -1,24 +1,49 @@
 ---
-- name: TAC test
-  hosts: cisco
+- name: Cisco Device Test
+  hosts: all
   gather_facts: false
   tasks:
     - name: Backup Full Configuration
+      when:
+        - ansible_network_os == 'cisco.ios.ios'
+      register: backups
       cisco.ios.ios_config:
         backup: true
         backup_options:
           dir_path: ./backups
 
-    - name: Capture SNMP Configuration
-      cisco.ios.ios_snmp_server:
-        state: gathered
+    # - name: Archive backups
+    #   ansible.builtin.copy:
+    #     src: "{{ backups }}"
+    #     dest: "{{ dest }}"
+    #     mode: 0644
+
+    # - name: Archive backup to S3
+    #   amazon.aws.s3_object:
+    #     profile:
+    #     bucket: cisco_backups
+    #     mode: put
+    #     object: "backups/{{ backups.date }}/{{ backups.time }}/{{ inventory_host }}/{{ backups.filename }}"
+    #     src: "{{ backups.path }}"
+    #   register: s3object
+
+    # - name: Capture SNMP Configuration
+    #   when:
+    #     - ansible_network_os == 'cisco.ios.ios'
+    #   cisco.ios.ios_snmp_server:
+    #     state: gathered
 
     - name: Render SNMP Configuration # noqa: args[module]
+      when:
+        - ansible_network_os == 'cisco.ios.ios'
       cisco.ios.ios_snmp_server:
+        config: "{{ inventory_snmp | ansible.builtin.combine(site_snmp, device_snmp, recursive=true, list_merge='append_rp') }}"
         state: rendered
-        config: "{{ inventory_snmp }}"
 
     - name: Set SNMP Configuration # noqa: args[module]
+      failed_when: false
+      when:
+      - ansible_network_os == 'cisco.ios.ios'
       cisco.ios.ios_snmp_server:
+        config: "{{ inventory_snmp | ansible.builtin.combine(site_snmp, device_snmp, recursive=true, list_merge='append_rp') }}"
         # state: replaced
-        config: "{{ inventory_snmp }}"
