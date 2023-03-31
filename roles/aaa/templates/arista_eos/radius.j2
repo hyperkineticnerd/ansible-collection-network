@@ -1,0 +1,13 @@
+radius-server key 0 arista7050qx
+
+aaa group server radus HKNLAB
+  server 172.16.100.11 auth-port 1812 acct-port 1813
+
+aaa authentication login default group HKNLAB local
+aaa authentication enable default group HKNLAB local
+aaa authentication dot1x default group HKNLAB
+
+aaa authorization exec default group HKNLAB local
+aaa authorization commands all default group HKNLAB local
+
+aaa accounting system default start-stop group HKNLAB local

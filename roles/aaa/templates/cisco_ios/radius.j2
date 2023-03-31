@@ -1,0 +1,17 @@
+aaa new-model
+
+radius server SPARTAN
+  address ipv4 172.16.100.11
+  key cisco3750
+
+aaa group server radus HKNLAB
+  server name SPARTAN
+
+aaa authentication login default group HKNLAB local
+aaa authentication enable default group HKNLAB enable
+aaa authentication ppp default group HKNLAB local
+
+aaa authorization exec default group HKNLAB local
+aaa authorization network default group HKNLAB local
+
+aaa accounting network default start-stop group HKNLAB local

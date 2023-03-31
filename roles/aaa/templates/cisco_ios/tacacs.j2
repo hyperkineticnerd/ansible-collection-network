@@ -1,0 +1,17 @@
+aaa new-model
+
+tacacs server TACACS_SERVER1
+  address ipv4 172.16.110.11
+  key cisco3750
+
+aaa group server tacacs+ HKN_LAB
+  server name TACACS_SERVER1
+
+aaa authentication login default group HKNLAB local
+aaa authentication enable default group HKNLAB enable
+aaa authentication ppp default group HKNLAB local
+
+aaa authorization exec default group HKNLAB local
+aaa authorization network default group HKNLAB local
+
+aaa accounting network default start-stop group HKNLAB local

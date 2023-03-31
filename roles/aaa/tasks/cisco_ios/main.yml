@@ -1,13 +1,13 @@
-# username admin privilege 15 password 0 ***REMOVED***
-
-# aaa new-model
-# aaa authentication login default local enable
-
-# ip ssh authentication-retries 5
-
-# ip default-gateway 172.16.0.3
-# ip classless
-# ip route 0.0.0.0 0.0.0.0 172.16.0.3
-# ip http server
-# ip http secure-server
 ---
+# tasks file for aaa
+- name: Cisco IOS - AAA - RADIUS
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+    - not network_role_use_radius
+  ansible.builtin.include_tasks: cisco_ios/radius.yml
+
+- name: Cisco IOS - AAA - TACACS+
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+    - not network_role_use_tacacs
+  ansible.builtin.include_tasks: cisco_ios/tacacs.yml

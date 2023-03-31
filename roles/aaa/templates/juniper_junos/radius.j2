@@ -1,0 +1,16 @@
+set groups global system radius-server 172.16.100.11
+set groups global system radius-server 172.16.100.11 source-address 172.16.0.1
+set groups global system radius-server 172.16.100.11 secret junipersrx340
+set groups global system radius-server 172.16.100.11 port 1812
+set groups global system radius-server 172.16.100.11 retry 2
+set groups global system radius-server 172.16.100.11 timeout 10
+
+set groups global system authentication-order [ radius tacplus password ]
+
+set groups global system login user remote class super-user
+set groups global system login user RO class read-only
+set groups global system login user OP class operator
+set groups global system login user SU class super-user
+set groups global system login user remote full-name "default remote access user template"
+set groups global system login user remote class read-only
+

@@ -1,0 +1,8 @@
+---
+# tasks file for vlan
+- name: Cisco IOS - AAA - TACACS+ - Set
+  failed_when: false
+  with_items: 
+    - "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"
+  cisco.ios.ios_config:
+    src: cisco_ios/tacacs.j2

@@ -1,0 +1,8 @@
+---
+# tasks file for vlan
+- name: Juniper JunOS - AAA - RADIUS - Set
+  failed_when: false
+  with_items: 
+    - "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"
+  junipernetworks.junos.junos_config:
+    src: juniper_junos/radius.j2
