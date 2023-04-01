@@ -8,5 +8,5 @@
 - name: Arista EOS - VLAN L3
   when:
     - ansible_network_os == 'arista.eos.eos'
-    - not network_role_disable_l3
+    - not network_role_l3_disable
   ansible.builtin.include_tasks: arista_eos/l3.yml

@@ -3,11 +3,11 @@
 - name: Juniper JunOS - AAA - RADIUS
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'
-    - not network_role_use_radius
+    - network_role_use_radius
   ansible.builtin.include_tasks: juniper_junos/radius.yml
 
 - name: Juniper JunOS - AAA - TACACS+
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'
-    - not network_role_use_tacacs
+    - network_role_use_tacacs
   ansible.builtin.include_tasks: juniper_junos/tacacs.yml

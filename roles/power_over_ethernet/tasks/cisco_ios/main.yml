@@ -14,5 +14,5 @@
 - name: Cisco IOS - POE Interfaces L3
   when:
     - ansible_network_os == 'cisco.ios.ios'
-    - not network_role_disable_l3
+    - not network_role_l3_disable
   ansible.builtin.include_tasks: cisco_ios/l3.yml

@@ -2,7 +2,7 @@
 # tasks file for vlan
 - name: Arista EOS - AAA - TACACS+ - Set
   failed_when: false
-  with_items: 
-    - "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"
+  when:
+    - ansible_network_os == 'arista.eos.eos'
   arista.eos.eos_config:
     src: arista_eos/tacacs.j2
