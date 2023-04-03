@@ -17,4 +17,4 @@ jobs:
       - name: molecule
         uses: hyperkineticnerd/github-action-molecule@master
         with:
-          command: lint
+          command: molecule lint
