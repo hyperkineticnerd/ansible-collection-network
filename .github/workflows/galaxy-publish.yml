@@ -19,7 +19,7 @@ jobs:
         run: echo "RELEASE_VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
 
       - name: Update galaxy.yml
-        run: 'sed -i -e "s/version: 1.0.1/version: ${{ env.RELEASE_VERSION }}/g" galaxy.yml'
+        run: "sed -i -e 's/^version: .*/version: ${{ env.RELEASE_VERSION }}/g' galaxy.yml"
 
       - name: Build Collection
         uses: hyperkineticnerd/github-action-galaxy@HEAD
