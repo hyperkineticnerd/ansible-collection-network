@@ -29,5 +29,5 @@ jobs:
       - name: Deploy Collection
         uses: hyperkineticnerd/github-action-galaxy-publish@HEAD
         with:
-          options: '--api-key ${{ secrets.GALAXY_API_KEY }}'
           archive: '/github/workspace/hyperkineticnerd-network-${{ env.RELEASE_VERSION }}.tar.gz'
+          options: '--api-key=${{ secrets.GALAXY_API_KEY }}'
