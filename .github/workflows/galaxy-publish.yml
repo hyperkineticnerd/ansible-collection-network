@@ -22,12 +22,12 @@ jobs:
         run: "sed -i -e 's/^version: .*/version: ${{ env.RELEASE_VERSION }}/g' galaxy.yml"
 
       - name: Build Collection
-        uses: hyperkineticnerd/github-action-galaxy@HEAD
+        uses: hyperkineticnerd/github-action-galaxy-build@HEAD
         with:
-          options: --force .
+          options: --force
 
       - name: Deploy Collection
-        uses: hyperkineticnerd/github-action-galaxy@HEAD
+        uses: hyperkineticnerd/github-action-galaxy-publish@HEAD
         with:
-          command: publish
-          options: --api-key ${{ secrets.GALAXY_API_KEY }} hyperkineticnerd-network-${{ env.RELEASE_VERSION }}.tar.gz
+          options: --api-key ${{ secrets.GALAXY_API_KEY }}
+          archive: hyperkineticnerd-network-${{ env.RELEASE_VERSION }}.tar.gz
