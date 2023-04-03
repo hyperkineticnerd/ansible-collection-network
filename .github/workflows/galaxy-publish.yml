@@ -23,8 +23,6 @@ jobs:
 
       - name: Build Collection
         uses: hyperkineticnerd/github-action-galaxy@HEAD
-        with:
-          options: '--api-key ${{ secrets.GALAXY_API_KEY }}'
 
       - name: Deploy Collection
         uses: hyperkineticnerd/github-action-galaxy@HEAD
