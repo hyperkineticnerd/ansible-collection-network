@@ -24,7 +24,7 @@ jobs:
       - name: Build Collection
         uses: hyperkineticnerd/github-action-galaxy@HEAD
         with:
-          options: '--force'
+          options: '--force ${GITHUB_WORKSPACE}'
 
       - name: Deploy Collection
         uses: hyperkineticnerd/github-action-galaxy@HEAD
