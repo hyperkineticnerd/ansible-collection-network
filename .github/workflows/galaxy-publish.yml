@@ -24,11 +24,10 @@ jobs:
       - name: Build Collection
         uses: hyperkineticnerd/github-action-galaxy@HEAD
         with:
-          # options: "[${GITHUB_WORKSPACE}, '--force']"
-          options: ${GITHUB_WORKSPACE} --force
+          options: --force .
 
       - name: Deploy Collection
         uses: hyperkineticnerd/github-action-galaxy@HEAD
         with:
-          command: 'publish'
-          options: '--api-key ${{ secrets.GALAXY_API_KEY }} hyperkineticnerd-network-${{ env.RELEASE_VERSION }}.tar.gz'
+          command: publish
+          options: --api-key ${{ secrets.GALAXY_API_KEY }} hyperkineticnerd-network-${{ env.RELEASE_VERSION }}.tar.gz
