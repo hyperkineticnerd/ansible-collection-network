@@ -6,7 +6,7 @@ dependency:
     role-file: requirements.yml
     requirements-file: requirements.yml
 driver:
-  name: docker
+  name: delegated
 platforms:
   - name: instance
     image: registry.access.redhat.com/ubi9/ubi:latest
