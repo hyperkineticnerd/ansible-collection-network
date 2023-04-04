@@ -30,4 +30,4 @@ jobs:
         uses: hyperkineticnerd/github-action-galaxy-publish@HEAD
         with:
           archive: '/github/workspace/hyperkineticnerd-network-${{ env.RELEASE_VERSION }}.tar.gz'
-          options: '--api-key=${{ secrets.GALAXY_API_KEY }}'
+          token: '${{ secrets.GALAXY_API_KEY }}'
