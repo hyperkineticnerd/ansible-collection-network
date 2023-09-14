@@ -1,9 +1,9 @@
-set groups global system radius-server 172.16.100.11
-set groups global system radius-server 172.16.100.11 source-address 172.16.0.1
-set groups global system radius-server 172.16.100.11 secret junipersrx340
-set groups global system radius-server 172.16.100.11 port 1812
-set groups global system radius-server 172.16.100.11 retry 2
-set groups global system radius-server 172.16.100.11 timeout 10
+set groups global system radius-server {{ radius_server.0.ipaddr }}
+set groups global system radius-server {{ radius_server.0.ipaddr }} source-address {{ inventory_hostname }}
+set groups global system radius-server {{ radius_server.0.ipaddr }} secret {{ radius_key }}
+set groups global system radius-server {{ radius_server.0.ipaddr }} port {{ radius_server.0.auth_port }}
+set groups global system radius-server {{ radius_server.0.ipaddr }} retry 2
+set groups global system radius-server {{ radius_server.0.ipaddr }} timeout 10
 
 set groups global system authentication-order [ radius tacplus password ]
 

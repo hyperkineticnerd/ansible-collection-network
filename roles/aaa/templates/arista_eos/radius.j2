@@ -1,13 +1,13 @@
-radius-server key 0 arista7050qx
+radius-server key 0 {{ radius_key }}
 
-aaa group server radius HKNLAB
-  server 172.16.100.11 auth-port 1812 acct-port 1813
+aaa group server radius {{ radius_group }}
+  server {{ radius_server.0.ipaddr }} auth-port {{ radius_server.0.auth_port }} acct-port {{ radius_server.0.acct_port }}
 
-aaa authentication login default group HKNLAB local
-aaa authentication enable default group HKNLAB local
-aaa authentication dot1x default group HKNLAB
+aaa authentication login default group {{ radius_group }} local
+aaa authentication enable default group {{ radius_group }} local
+aaa authentication dot1x default group {{ radius_group }}
 
-aaa authorization exec default group HKNLAB local
-aaa authorization commands all default group HKNLAB local
+aaa authorization exec default group {{ radius_group }} local
+aaa authorization commands all default group {{ radius_group }} local
 
-aaa accounting system default start-stop group HKNLAB
+aaa accounting system default start-stop group {{ radius_group }}

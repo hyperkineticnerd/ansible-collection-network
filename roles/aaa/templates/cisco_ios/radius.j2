@@ -1,21 +1,21 @@
 aaa new-model
 !
 !
-radius server SPARTAN
-  address ipv4 172.16.100.11 auth-port 1812 acct-port 1813
-  key 0 cisco3750
+radius server {{ radius_server.0.name }}
+  address ipv4 {{ radius_server.0.ipaddr }} auth-port {{ radius_server.0.auth_port }} acct-port {{ radius_server.0.acct_port }}
+  key 0 {{ radius_key }}
 !
-aaa group server radius HKNLAB
-  server name SPARTAN
+aaa group server radius {{ radius_group }}
+  server name {{ radius_server.0.name }}
 !
-aaa authentication login default group HKNLAB local
-aaa authentication enable default group HKNLAB enable
-aaa authentication ppp default group HKNLAB local
+aaa authentication login default group {{ radius_group }} local
+aaa authentication enable default group {{ radius_group }} enable
+aaa authentication ppp default group {{ radius_group }} local
 !
-aaa authorization exec default group HKNLAB local
-aaa authorization network default group HKNLAB local
+aaa authorization exec default group {{ radius_group }} local
+aaa authorization network default group {{ radius_group }} local
 !
-aaa accounting network default start-stop group HKNLAB local
+aaa accounting network default start-stop group {{ radius_group }} local
 !
 aaa session-id common
 !
