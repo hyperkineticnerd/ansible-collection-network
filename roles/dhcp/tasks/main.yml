@@ -1,11 +1,11 @@
 ---
 # tasks file for dhcp
-- name: Arista EOS DHCP
+- name: Arista EOS - DHCP
   ansible.builtin.include_tasks: arista_eos/main.yml
   when:
     - ansible_network_os == 'arista.eos.eos'
 
-# - name: Arista EOS DHCP
+# - name: Arista EOS - DHCP
 #   arista.eos.eos_config:
 #     src: arista_eos/loop.j2
 #     backup: false

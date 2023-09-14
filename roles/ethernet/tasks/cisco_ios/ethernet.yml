@@ -1,6 +1,6 @@
 ---
 # tasks file for ethernet
-- name: Set Ethernet
+- name: Cisco IOS - Ethernet - Set Ethernet
   arista.eos.eos_interfaces:
     state: replaced
     config:

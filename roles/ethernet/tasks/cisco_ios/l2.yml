@@ -1,6 +1,6 @@
 ---
 # tasks file for ethernet
-- name: Set Switch Port
+- name: Cisco IOS - Ethernet - Set Switch Port
   cisco.ios.ios_l2_interfaces:
     state: replaced
     config:

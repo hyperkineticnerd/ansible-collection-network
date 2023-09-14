@@ -1,6 +1,6 @@
 ---
 # tasks file for ethernet
-- name: Set L2
+- name: Arista EOS - Ethernet - Set L2
   arista.eos.eos_l2_interfaces:
     state: replaced
     config:

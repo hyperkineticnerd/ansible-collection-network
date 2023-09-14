@@ -15,7 +15,7 @@
     - ansible_network_os == 'cisco.ios.ios'
   ansible.builtin.include_tasks: cisco_ios/main.yml
 
-- name: Juniper Junos - Base Configuration
+- name: Juniper SRX - Base Configuration
   when: 
     - ansible_network_os == 'junipernetworks.junos.junos'
   ansible.builtin.include_tasks: juniper_junos/main.yml

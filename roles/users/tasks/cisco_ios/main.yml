@@ -1,6 +1,6 @@
 ---
 # tasks file for users
-- name: Add User
+- name: Cisco IOS - User - Add
   cisco.ios.ios_user:
     name: "{{ item.user }}"
     privilege: "{{ item.privilege }}"

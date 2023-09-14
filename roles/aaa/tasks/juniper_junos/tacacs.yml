@@ -1,6 +1,6 @@
 ---
 # tasks file for vlan
-- name: Juniper JunOS - AAA - TACACS+ - Set
+- name: Juniper SRX - AAA - TACACS+ - Set
   failed_when: false
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'

@@ -1,6 +1,6 @@
 ---
 # tasks file for port_forward
-- name: Run Juniper Networks Junos Port Forward commands
+- name: Juniper SRX - Port Forward commands
   ansible.builtin.include_tasks: juniper_junos/main.yml
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'

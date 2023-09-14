@@ -1,6 +1,6 @@
 ---
 # tasks file for ethernet
-- name: Set Ethernet
+- name: Arista EOS - Ethernet - Set Ethernet
   arista.eos.eos_interfaces:
     state: replaced
     config:

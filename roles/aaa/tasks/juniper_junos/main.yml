@@ -1,12 +1,12 @@
 ---
 # tasks file for aaa
-- name: Juniper JunOS - AAA - RADIUS
+- name: Juniper SRX - AAA - RADIUS
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'
     - network_role_use_radius
   ansible.builtin.include_tasks: juniper_junos/radius.yml
 
-- name: Juniper JunOS - AAA - TACACS+
+- name: Juniper SRX - AAA - TACACS+
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'
     - network_role_use_tacacs

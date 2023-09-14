@@ -1,6 +1,11 @@
 ---
 # tasks file for power_over_ethernet
-- name: Arista EOS
+- name: Arista EOS - Power over Ethernet
   when:
     - ansible_network_os == 'arista.eos.eos'
   ansible.builtin.include_tasks: arista_eos/main.yml
+
+- name: Cisco IOS - Power over Ethernet
+  when:
+    - ansible_network_os == 'cisco.ios.ios'
+  ansible.builtin.include_tasks: cisco_ios/main.yml
