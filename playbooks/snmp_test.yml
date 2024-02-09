@@ -43,7 +43,7 @@
     - name: Set SNMP Configuration # noqa: args[module]
       failed_when: false
       when:
-      - ansible_network_os == 'cisco.ios.ios'
+        - ansible_network_os == 'cisco.ios.ios'
       cisco.ios.ios_snmp_server:
         config: "{{ inventory_snmp | ansible.builtin.combine(device_type_snmp, host_snmp, recursive=true, list_merge='append_rp') }}"
         # state: replaced

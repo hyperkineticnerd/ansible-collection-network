@@ -1,4 +1,4 @@
 ---
 # defaults file for aaa
-network_role_use_radius: false
-network_role_use_tacacs: false
+aaa_network_role_use_radius: false
+aaa_network_role_use_tacacs: false

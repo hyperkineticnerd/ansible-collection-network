@@ -29,6 +29,14 @@
           filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
           dir_path: ./backups
 
+    - name: Run Cisco NXOS backup
+      when: ansible_network_os == 'cisco.nxos.nxos'
+      cisco.nxos.nxos_config:
+        backup: true
+        backup_options:
+          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+          dir_path: ./backups
+
     # - name: Run backup
     #   # connection: netconf
     #   community.network.icx_config:

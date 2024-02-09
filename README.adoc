@@ -1,0 +1,18 @@
+= Ansible Collection - hyperkineticnerd.network
+
+This collection allows network engineers to manage a large enterprise configuration utilizing multiple vendors.
+
+== Usage
+
+=== Built-in playbooks
+
+There is currently a single usable playbook for backing up switch configurations. Usage is `ansible-playbook hyperkineticnerd.network.backup`
+
+=== Writing your own playbook
+
+Your inventory can be organized at several layers and at the device, device role, site, and enterprise levels.  It does increase complexity of management, but gives granularity to configuration and to reduce repeating the same configuration at the device level.
+
+Your playbooks can just use, for example, the `hyperkineticnerd.network.vlan` role to combine your device roles (edge, core, router, firewall) and site configurations within your inventory to build a full switch/router configuration.
+
+=== Creating your inventories
+

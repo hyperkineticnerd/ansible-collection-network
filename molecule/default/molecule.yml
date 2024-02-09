@@ -6,10 +6,16 @@ dependency:
     role-file: requirements.yml
     requirements-file: requirements.yml
 driver:
-  name: delegated
+  options:
+    managed: False
+    login_cmd_template: "podman exec -ti {instance} bash"
+    ansible_connection_options:
+      ansible_connection: podman
 platforms:
-  - name: instance
+  - name: ubi9
     image: registry.access.redhat.com/ubi9/ubi:latest
+  - name: ubi8
+    image: registry.access.redhat.com/ubi8/ubi:latest
 provisioner:
   name: ansible
 verifier:
