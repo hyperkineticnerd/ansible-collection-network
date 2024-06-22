@@ -9,7 +9,7 @@
       junipernetworks.junos.junos_config:
         backup: true
         backup_options:
-          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.junos"
           dir_path: ./backups
           backup_format: text
 
@@ -18,7 +18,7 @@
       arista.eos.eos_config:
         backup: true
         backup_options:
-          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.eos"
           dir_path: ./backups
 
     - name: Run Cisco IOS backup
@@ -26,7 +26,7 @@
       cisco.ios.ios_config:
         backup: true
         backup_options:
-          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.ios"
           dir_path: ./backups
 
     - name: Run Cisco NXOS backup
@@ -34,7 +34,7 @@
       cisco.nxos.nxos_config:
         backup: true
         backup_options:
-          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.conf"
+          filename: "{{ inventory_hostname }}_config.{{ lookup('pipe', 'date +%F@%T') }}.nxos"
           dir_path: ./backups
 
     # - name: Run backup

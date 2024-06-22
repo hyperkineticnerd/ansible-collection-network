@@ -1,1 +1,3 @@
+netaddr
 ansible-pylibssh
+python-nmap

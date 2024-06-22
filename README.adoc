@@ -16,3 +16,4 @@ Your playbooks can just use, for example, the `hyperkineticnerd.network.vlan` ro
 
 === Creating your inventories
 
+To begin building out your inventory, first create your main inventory file `inventories/hosts.yml`. This file will define your switches, routers, and security gateways. Next start building your `group_vars` folder and `host_vars` folder (if you don't want to include all the host-based variables within hosts.yml). `group_vars` under `inventories` will contain vendor and device model folders for each of your switches. `group_vars` will also include role folders and site folders which will help Ansible colligate all variables together. Your Role groups will hold settings for each switch role you define. Your site groups are for settings like SNMP or switch owner contact information.

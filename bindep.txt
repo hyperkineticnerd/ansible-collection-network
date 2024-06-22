@@ -1,1 +1,1 @@
-nmap
+nmap [platform:rpm]

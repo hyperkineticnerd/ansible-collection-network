@@ -1,6 +1,11 @@
 ---
 # tasks file for port_forward
-- name: Juniper SRX - Port Forward commands
-  ansible.builtin.include_tasks: juniper_junos/main.yml
+- name: Juniper SRX - Port Forward commands - UnSet
+  ansible.builtin.include_tasks: juniper_junos/remove.yml
+  when:
+    - ansible_network_os == 'junipernetworks.junos.junos'
+
+- name: Juniper SRX - Port Forward commands - Set
+  ansible.builtin.include_tasks: juniper_junos/add.yml
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'

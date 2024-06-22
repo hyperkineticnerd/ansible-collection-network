@@ -1,0 +1,17 @@
+---
+# tasks file for port_forward
+- name: Juniper SRX - Port Forward - Unset for {{ item.name }}
+  with_items: 
+    - "{{ inventory_port_forward_disabled }}"
+  vars:
+    ansible_command_timeout: 180
+  junipernetworks.junos.junos_config:
+    lines:
+      - delete security nat destination pool {{ item.name }}
+      - delete security nat destination rule-set {{ item.rule_set }} rule {{ item.name }}
+
+      - delete applications application {{ item.name }}
+      
+      - edit security policies from-zone {{ item.source_zone }} to-zone {{ item.target_zone }}
+      - delete policy Port-Forward-{{ item.host }} match application {{ item.name }}
+      - exit
