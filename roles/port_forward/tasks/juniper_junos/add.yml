@@ -1,6 +1,7 @@
 ---
 # tasks file for port_forward
-- name: Juniper SRX - Port Forward - Set for {{ item.name }}
+- name: Juniper SRX - Port Forward - Set - DNAT # for {{ item.name }}
+  ignore_errors: true
   with_items: 
     - "{{ inventory_port_forward }}"
   vars:
@@ -9,18 +10,30 @@
     lines:
       - edit security nat destination
       - set pool {{ item.name }} address {{ item.target_address }} port {{ item.target_port }}
-      - exit
-
-      - edit security nat destination rule-set {{ item.rule_set }}  
+      - edit rule-set {{ item.rule_set }}  
       - set from zone {{ item.source_zone }}
       - set rule {{ item.name }} match destination-address {{ item.source_address }}
       - set rule {{ item.name }} match destination-port {{ item.source_port }}
       - set rule {{ item.name }} then destination-nat pool {{ item.name }}
-      - exit
       
+- name: Juniper SRX - Port Forward - Set - Application # for {{ item.name }}
+  ignore_errors: true
+  with_items: 
+    - "{{ inventory_port_forward }}"
+  vars:
+    ansible_command_timeout: 180
+  junipernetworks.junos.junos_config:
+    lines:
       - set applications application {{ item.name }} protocol {{ item.protocol }} destination-port {{ item.target_port }}
       
+- name: Juniper SRX - Port Forward - Set - Security Policy # for {{ item.name }}
+  ignore_errors: true
+  with_items: 
+    - "{{ inventory_port_forward }}"
+  vars:
+    ansible_command_timeout: 180
+  junipernetworks.junos.junos_config:
+    lines:
       - edit security policies from-zone {{ item.source_zone }} to-zone {{ item.target_zone }}
       - set policy Port-Forward-{{ item.target_host }} match source-address any destination-address {{ item.target_address }} application {{ item.name }}
       - set policy Port-Forward-{{ item.target_host }} then permit
-      - exit
