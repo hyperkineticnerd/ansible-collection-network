@@ -1,6 +1,6 @@
 set groups global system radius-server {{ radius_server.0.ipaddr }}
 set groups global system radius-server {{ radius_server.0.ipaddr }} source-address {{ inventory_hostname }}
-set groups global system radius-server {{ radius_server.0.ipaddr }} secret {{ radius_key }}
+set groups global system radius-server {{ radius_server.0.ipaddr }} secret {{ host_radius_key | default(device_radius_key) }}
 set groups global system radius-server {{ radius_server.0.ipaddr }} port {{ radius_server.0.auth_port }}
 set groups global system radius-server {{ radius_server.0.ipaddr }} retry 2
 set groups global system radius-server {{ radius_server.0.ipaddr }} timeout 10

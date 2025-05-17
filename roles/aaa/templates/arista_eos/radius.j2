@@ -1,4 +1,4 @@
-radius-server key 0 {{ radius_key }}
+radius-server key 0 {{ host_radius_key | default(device_radius_key) }}
 
 aaa group server radius {{ radius_group }}
   server {{ radius_server.0.ipaddr }} auth-port {{ radius_server.0.auth_port }} acct-port {{ radius_server.0.acct_port }}
