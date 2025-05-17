@@ -1,0 +1,18 @@
+---
+# tasks file for ethernet
+- name: Cisco NXOS - Ethernet - Interfaces
+  ansible.builtin.include_tasks: cisco_nxos/ethernet.yml
+  when:
+    - ansible_network_os == 'cisco.nxox.nxos'
+
+- name: Cisco NXOS - Ethernet - L2
+  ansible.builtin.include_tasks: cisco_nxos/l2.yml
+  when:
+    - ansible_network_os == 'cisco.nxos.nxos'
+    - not network_role_disable_l2
+
+- name: Cisco NXOS - Ethernet - L3
+  ansible.builtin.include_tasks: cisco_nxos/l3.yml
+  when:
+    - ansible_network_os == 'cisco.nxos.nxos'
+    - not network_role_l3_disable

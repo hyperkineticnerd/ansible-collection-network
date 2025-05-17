@@ -1,0 +1,19 @@
+---
+# tasks file for ethernet
+- name: Arista EOS - Ethernet - Set L2
+  with_items: 
+    # - "{{ inventory_snmp | ansible.builtin.combine(device_type_snmp, host_snmp, recursive=true, list_merge='append_rp') }}"
+    # - "{{ device_lan_ports }}"
+    # - "{{ inventory_vlans | ansible.builtin.combine(device_vlans, recursive=true, list_merge='append_rp') }}"
+    - "{{ device_interfaces }}"
+    - "{{ device_lag_interfaces }}"
+  arista.eos.eos_l2_interfaces:
+    state: replaced
+    config:
+      - name: "{{ item.name }}"
+        mode: "{{ item.port_mode | default('trunk') }}"
+        access:
+          vlan: "{{ item.access.native_vlan | default(omit) }}"
+        trunk:
+          native_vlan: "{{ item.trunk.native_vlan | default(omit) }}"
+          trunk_allowed_vlans: "{{ item.trunk.allowed_vlans | default(omit) }}"

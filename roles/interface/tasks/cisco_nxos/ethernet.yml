@@ -1,0 +1,10 @@
+---
+# tasks file for ethernet
+- name: Cisco NXOS - Ethernet - Set Ethernet
+  cisco.nxos.nxos_interfaces:
+    state: replaced
+    config:
+      - name: "{{ item.iface_name }}"
+        description: "{{ item.port_name }}"
+        mode: layer2
+  with_items: "{{ device_lan_ports }}"

@@ -1,0 +1,16 @@
+---
+# tasks file for ethernet
+- name: Arista EOS - Ethernet
+  ansible.builtin.include_tasks: arista_eos/main.yml
+  when:
+    - ansible_network_os == 'arista.eos.eos'
+
+- name: Cisco NXOS - Ethernet
+  ansible.builtin.include_tasks: cisco_nxos/main.yml
+  when:
+    - ansible_network_os == 'cisco.nxos.nxos'
+
+- name: Cisco IOS - Ethernet
+  ansible.builtin.include_tasks: cisco_ios/main.yml
+  when:
+    - ansible_network_os == 'cisco.ios.ios'

@@ -1,9 +1,0 @@
----
-# handlers file for port_forward
-# - name: Check correctness of commit configuration
-#   junipernetworks.junos.junos_config:
-#     check_commit: true
-
-# - name: confirm a previous commit
-#   junipernetworks.junos.junos_config:
-#     confirm_commit: true

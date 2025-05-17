@@ -1,6 +1,6 @@
 ---
 # tasks file for users
-- name: Cisco IOS - User - Add
+- name: Arista EOS - User - Add
   no_log: true
-  cisco.ios.ios_user:
+  arista.eos.eos_user:
     aggregate: "{{ inventory_users }}"

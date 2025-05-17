@@ -1,0 +1,14 @@
+---
+# tasks file for vlan
+- name: Cisco NXOS - VLAN L3 - Set
+  failed_when: false
+  with_items: 
+    - "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"
+  cisco.nxos.nxos_l3_interfaces:
+    state: replaced
+    config:
+      - name: "Vlan {{ item.vlan_id }}"
+        ipv4:
+          - address: "{{ item.subnets[0] }}"
+          # - address: "{{ item.subnets[1] | default(omit) }}"
+          #   secondary: true

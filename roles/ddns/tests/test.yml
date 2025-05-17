@@ -1,6 +1,0 @@
----
-- name: Unit Tests
-  hosts: localhost
-  remote_user: root
-  roles:
-    - ddns

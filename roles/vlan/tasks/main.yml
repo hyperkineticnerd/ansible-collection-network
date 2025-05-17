@@ -5,12 +5,12 @@
     - ansible_network_os == 'arista.eos.eos'
   ansible.builtin.include_tasks: arista_eos/main.yml
 
+- name: Cisco NXOS - VLAN
+  when:
+    - ansible_network_os == 'cisco.nxos.nxos'
+  ansible.builtin.include_tasks: cisco_nxos/main.yml
+
 - name: Cisco IOS - VLAN
   when:
     - ansible_network_os == 'cisco.ios.ios'
   ansible.builtin.include_tasks: cisco_ios/main.yml
-
-# - name: Brocade ICX - VLAN
-#   ansible.builtin.include_tasks: brocade_icx/main.yml
-#   when:
-#     - ansible_network_os == 'community.network.icx'

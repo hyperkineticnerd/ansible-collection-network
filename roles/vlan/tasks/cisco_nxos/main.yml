@@ -1,0 +1,19 @@
+---
+# tasks file for vlan
+- name: Cisco NXOS - VLAN - Transparency Mode
+  when:
+    - ansible_network_os == 'cisco.nxos.nxos'
+  cisco.nxos.nxos_config:
+    lines:
+      - vtp mode transparent
+
+- name: Cisco NXOS - VLAN
+  when:
+    - ansible_network_os == 'cisco.nxos.nxos'
+  ansible.builtin.include_tasks: cisco_nxos/vlan.yml
+
+- name: Cisco NXOS - VLAN L3
+  when:
+    - ansible_network_os == 'cisco.nxos.nxos'
+    - not network_role_l3_disable
+  ansible.builtin.include_tasks: cisco_nxos/l3.yml

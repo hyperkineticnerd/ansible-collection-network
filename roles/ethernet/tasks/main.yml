@@ -1,6 +1,0 @@
----
-# tasks file for ethernet
-- name: Arista EOS - Ethernet
-  ansible.builtin.include_tasks: arista_eos/main.yml
-  when:
-    - ansible_network_os == 'arista.eos.eos'

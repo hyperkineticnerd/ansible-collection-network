@@ -1,0 +1,16 @@
+---
+# tasks file for ethernet
+- name: Arista EOS - Ethernet - Set L3
+  with_items: 
+    # - "{{ inventory_snmp | ansible.builtin.combine(device_type_snmp, host_snmp, recursive=true, list_merge='append_rp') }}"
+    # - "{{ device_lan_ports }}"
+    # - "{{ inventory_vlans | ansible.builtin.combine(device_vlans, recursive=true, list_merge='append_rp') }}"
+    - "{{ device_interfaces }}"
+    - "{{ device_lag_interfaces }}"
+  when:
+    - item.ipv4 is defined
+  arista.eos.eos_l3_interfaces:
+    state: replaced
+    config:
+      - name: "{{ item.name }}"
+        ipv4: "{{ item.ipv4 }}"
