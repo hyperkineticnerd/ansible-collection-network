@@ -1,8 +1,0 @@
-# ansible
-ansible-navigator.log
-
-# container
-context/**
-
-# python
-*.pyc

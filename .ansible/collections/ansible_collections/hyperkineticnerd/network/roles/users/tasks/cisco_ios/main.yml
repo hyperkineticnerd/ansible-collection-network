@@ -1,6 +1,0 @@
----
-# tasks file for users
-- name: Cisco IOS - User - Add
-  no_log: true
-  cisco.ios.ios_user:
-    aggregate: "{{ inventory_users }}"

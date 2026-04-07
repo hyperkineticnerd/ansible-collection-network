@@ -1,6 +1,6 @@
 ---
 - name: Arista EOS - SNMP - Set
-  junipernetworks.junos.junos_snmp_server:
+  juniper.device.snmp_server:
     state: rendered
     config:
       contact: "{{ inventory_snmp.contact }}"

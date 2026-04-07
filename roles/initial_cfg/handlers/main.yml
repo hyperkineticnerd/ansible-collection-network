@@ -6,6 +6,6 @@
       - write
 
 - name: Juniper SRX - Commit
-  junipernetworks.junos.junos_command:
+  juniper.device.command:
     commands:
       - commit and-quit

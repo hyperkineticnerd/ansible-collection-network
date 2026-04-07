@@ -24,6 +24,9 @@ collections:
     # version: 6.0.1
     type: galaxy
 
+  - name: containers.podman
+    type: galaxy
+
 roles: []
   # - name:
   #   version:

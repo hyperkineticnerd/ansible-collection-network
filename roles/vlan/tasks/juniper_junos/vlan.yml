@@ -3,7 +3,7 @@
 - name: Juniper SRX - VLAN - Set
   with_items:
     - "{{ [inventory_vlans, device_vlans] | community.general.lists_mergeby('name') }}"
-  junipernetworks.junos.junos_vlans:
+  juniper.device.junos_vlans:
     state: replaced
     config:
       - name: "{{ item.name }}"

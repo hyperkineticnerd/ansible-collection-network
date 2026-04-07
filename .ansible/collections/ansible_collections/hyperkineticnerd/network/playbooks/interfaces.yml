@@ -1,5 +1,0 @@
----
-- name: Cisco Device Test
-  hosts: all
-  gather_facts: false
-  tasks: []

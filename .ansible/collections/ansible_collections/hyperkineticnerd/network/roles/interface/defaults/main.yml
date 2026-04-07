@@ -1,4 +1,0 @@
----
-# defaults file for ethernet
-interface_interface_ethernet_network_role_disable_l2: false
-interface_interface_ethernet_network_role_l3_disable: false

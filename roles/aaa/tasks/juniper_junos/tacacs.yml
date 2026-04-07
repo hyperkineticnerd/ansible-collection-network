@@ -4,5 +4,5 @@
   failed_when: false
   when:
     - ansible_network_os == 'junipernetworks.junos.junos'
-  junipernetworks.junos.junos_config:
+  juniper.device.config:
     src: juniper_junos/tacacs.j2

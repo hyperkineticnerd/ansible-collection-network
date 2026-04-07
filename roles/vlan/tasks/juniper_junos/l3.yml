@@ -4,7 +4,7 @@
   failed_when: false
   with_items:
     - "{{ inventory_vlans | combine(device_vlans) }}"
-  junipernetworks.junos.junos_l3_interfaces:
+  juniper.device.l3_interfaces:
     state: replaced
     config:
       - name: "Vlan {{ item.vlan_id }}"
