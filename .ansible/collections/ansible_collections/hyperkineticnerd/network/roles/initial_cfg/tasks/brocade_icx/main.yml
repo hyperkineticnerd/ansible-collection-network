@@ -1,0 +1,20 @@
+---
+# tasks file for initial_cfg
+- name: Brocade ICX - Initial Cfg - Set Basic System
+  community.network.icx_system:
+    hostname: "{{ hostname }}"
+    domain_name: "{{ domain_name }}"
+    domain_search:
+      - hkn.lab
+    name_servers: "{{ inventory_dns_servers }}"
+    state: present
+
+- name: Brocade ICX - Initial Cfg - Set Admin User
+  community.network.icx_user:
+    aggregate:
+      - name: admin
+        privilege: 5
+        # sshkey: {{ omit }}
+        configured_password: "{{ admin_password }}"
+        update_password: always
+        state: present

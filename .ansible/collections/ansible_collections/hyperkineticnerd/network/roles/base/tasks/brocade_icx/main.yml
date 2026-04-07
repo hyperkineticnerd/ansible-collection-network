@@ -1,0 +1,6 @@
+---
+- name: Brocade ICX - Base Configuration - Set System
+  community.network.icx_system:
+    hostname: "{{ inventory_hostname }}"
+    domain_name: network.hkn.lab
+    name_servers: "{{ inventory_dns_servers }}"

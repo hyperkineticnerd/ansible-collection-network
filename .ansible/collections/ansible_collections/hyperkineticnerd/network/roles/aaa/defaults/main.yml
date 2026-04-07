@@ -1,0 +1,4 @@
+---
+# defaults file for aaa
+aaa_network_role_use_radius: false
+aaa_network_role_use_tacacs: false

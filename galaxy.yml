@@ -47,7 +47,7 @@ dependencies:
   cisco.nxos: ">=4.0.1"
   community.network: ">=5.0.0"
   community.general: ">=5.4.0"
-  junipernetworks.junos: ">=4.1.0"
+  juniper.device: ">=2.0.1"
 
 # The URL of the originating SCM repository
 repository: https://github.com/hyperkineticnerd/ansible-collection-network

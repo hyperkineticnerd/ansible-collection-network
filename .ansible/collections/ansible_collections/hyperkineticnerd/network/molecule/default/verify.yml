@@ -1,0 +1,6 @@
+---
+- name: Verify
+  hosts: localhost
+  tasks:
+    - name: Assert httpd installed
+      ansible.builtin.uri:

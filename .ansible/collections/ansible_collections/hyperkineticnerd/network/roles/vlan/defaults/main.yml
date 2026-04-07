@@ -1,0 +1,3 @@
+---
+# defaults file for vlan
+vlan_network_role_l3_disable: false

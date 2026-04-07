@@ -1,0 +1,9 @@
+---
+# tasks file for ethernet
+- name: Cisco NXOS - Ethernet - Set L3
+  cisco.nxos.nxos_l3_interfaces:
+    state: replaced
+    config:
+      # - name: Vlan 1
+      #   ipv4:
+      #     - address: 172.16.0.3/16

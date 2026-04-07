@@ -1,0 +1,9 @@
+---
+# tasks file for power_over_ethernet
+- name: Arista EOS - POE Interfaces L3 - Set
+  arista.eos.eos_l3_interfaces:
+    state: replaced
+    config:
+      # - name: Vlan 1
+      #   ipv4:
+      #     - address: 172.16.0.3/16

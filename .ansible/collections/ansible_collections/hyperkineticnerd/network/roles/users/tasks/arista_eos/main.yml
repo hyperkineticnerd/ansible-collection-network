@@ -1,0 +1,6 @@
+---
+# tasks file for users
+- name: Arista EOS - User - Add
+  no_log: true
+  arista.eos.eos_user:
+    aggregate: "{{ inventory_users }}"

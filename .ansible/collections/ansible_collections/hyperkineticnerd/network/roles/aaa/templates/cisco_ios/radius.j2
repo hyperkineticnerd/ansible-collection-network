@@ -1,0 +1,21 @@
+aaa new-model
+!
+!
+radius server {{ radius_server.0.name }}
+  address ipv4 {{ radius_server.0.ipaddr }} auth-port {{ radius_server.0.auth_port }} acct-port {{ radius_server.0.acct_port }}
+  key 0 {{ host_radius_key | default(device_radius_key) }}
+!
+aaa group server radius {{ radius_group }}
+  server name {{ radius_server.0.name }}
+!
+aaa authentication login default group {{ radius_group }} local
+aaa authentication enable default group {{ radius_group }} enable
+aaa authentication ppp default group {{ radius_group }} local
+!
+aaa authorization exec default group {{ radius_group }} local
+aaa authorization network default group {{ radius_group }} local
+!
+aaa accounting network default start-stop group {{ radius_group }} local
+!
+aaa session-id common
+!
